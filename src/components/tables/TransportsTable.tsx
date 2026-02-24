@@ -2,8 +2,17 @@
 
 import { transportSummaryData } from "@/data/dummyData";
 import { getTypeIcon, getStatusClass } from "@/lib/utils";
+import { useState } from "react";
+import { Pagination } from "./Pagination";
+
+const ITEMS_PER_PAGE = 5;
 
 export function TransportsTable() {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(transportSummaryData.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedData = transportSummaryData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   return (
     <div className="tableWrapper">
       <table className="table">
@@ -21,14 +30,16 @@ export function TransportsTable() {
         </thead>
 
         <tbody>
-          {transportSummaryData.map((transport) => (
+          {paginatedData.map((transport) => (
             <tr key={transport.transportId}>
               {/* ID */}
               <td>{transport.transportId}</td>
 
               {/* TYPE WITH ICON */}
               <td>
-                <div className="typeIcon">{getTypeIcon(transport.type)}</div>
+                <div className="typeIconWrap">
+                  <div className="typeIcon">{getTypeIcon(transport.type)}</div>
+                </div>
               </td>
 
               {/* VEHICLE */}
@@ -59,6 +70,12 @@ export function TransportsTable() {
           ))}
         </tbody>
       </table>
+
+      <Pagination 
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 }

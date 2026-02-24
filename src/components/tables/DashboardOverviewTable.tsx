@@ -2,8 +2,17 @@
 
 import { transportSummaryData } from "@/data/dummyData";
 import { getUtilization, getTypeIcon, getStatusClass } from "@/lib/utils";
+import { useState } from "react";
+import { Pagination } from "./Pagination";
+
+const ITEMS_PER_PAGE = 5;
 
 export function DashboardOverviewTable() {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(transportSummaryData.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedData = transportSummaryData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   return (
     <div className="tableWrapper">
       <table className="table">
@@ -21,13 +30,15 @@ export function DashboardOverviewTable() {
         </thead>
 
         <tbody>
-          {transportSummaryData.map((item) => (
+          {paginatedData.map((item) => (
             <tr key={item.transportId}>
               <td>{item.transportId}</td>
 
               {/* TYPE ICON */}
               <td>
-                <div className="typeIcon">{getTypeIcon(item.type)}</div>
+                <div className="typeIconWrap">
+                  <div className="typeIcon">{getTypeIcon(item.type)}</div>
+                </div>
               </td>
 
               {/* ROUTE */}
@@ -53,6 +64,12 @@ export function DashboardOverviewTable() {
           ))}
         </tbody>
       </table>
+
+      <Pagination 
+        currentPage={currentPage} 
+        totalPages={totalPages} 
+        onPageChange={setCurrentPage} 
+      />
     </div>
   );
 }
