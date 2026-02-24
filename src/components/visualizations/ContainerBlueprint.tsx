@@ -27,14 +27,23 @@ export function ContainerBlueprint({ container }: ContainerBlueprintProps) {
             <div className={`${styles.face} ${styles.left}`}></div>
             <div className={`${styles.face} ${styles.top}`}></div>
             <div className={`${styles.face} ${styles.bottom}`}></div>
+
+            {/* Inner fill volume based on used space percentage */}
+            <div 
+              className={styles.fillVolume}
+              style={{ width: `${percentageFull}%` }}
+            >
+              <div className={`${styles.fillFace} ${styles.fillTop}`}></div>
+              <div className={`${styles.fillFace} ${styles.fillFront}`}></div>
+              <div className={`${styles.fillFace} ${styles.fillLeft}`}></div>
+              <div className={`${styles.fillFace} ${styles.fillBack}`}></div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* 40% Right Side - Data Metrics */}
-      <div className={styles.dataPanel}>
-        <h2 className={styles.header}>Container Blueprint</h2>
-        
+      <div className={styles.dataPanel}>        
         <div className={styles.metricGroup}>
           <p className={styles.label}>Status</p>
           <p className={`${styles.value} ${styles.statusBadge}`}>{container.status}</p>
