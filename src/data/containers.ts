@@ -13,7 +13,7 @@ export interface Container {
   assignedDate: string | null;
 }
 
-const TRANSPORT_IDS = transportSummaryData.map((t) => t.transportId);
+
 const LOCATIONS = Array.from(
   new Set(transportSummaryData.flatMap((t) => [t.from, t.to])),
 );
@@ -35,61 +35,57 @@ function uniqueContainerId(existing: Set<string>) {
   return id;
 }
 
-export function generateContainers(
-  count = 200,
-  assignEvenly = true,
-): Container[] {
+export function generateContainers(): Container[] {
   const results: Container[] = [];
   const seen = new Set<string>();
-  const transportCount = TRANSPORT_IDS.length || 1;
 
-  for (let i = 0; i < count; i++) {
-    const containerId = uniqueContainerId(seen);
+  for (const transport of transportSummaryData) {
+    const count = transport.totalContainers || 0;
 
-    // assign transport evenly across available transports
-    const transportId = assignEvenly
-      ? TRANSPORT_IDS[i % transportCount]
-      : TRANSPORT_IDS[randomInt(0, transportCount - 1)];
+    for (let i = 0; i < count; i++) {
+      const containerId = uniqueContainerId(seen);
+      const transportId = transport.transportId;
 
-    const origin = LOCATIONS[randomInt(0, LOCATIONS.length - 1)];
-    let destination = LOCATIONS[randomInt(0, LOCATIONS.length - 1)];
-    if (destination === origin) {
-      destination =
-        LOCATIONS[(LOCATIONS.indexOf(origin) + 1) % LOCATIONS.length];
+      const origin = LOCATIONS[randomInt(0, LOCATIONS.length - 1)];
+      let destination = LOCATIONS[randomInt(0, LOCATIONS.length - 1)];
+      if (destination === origin) {
+        destination =
+          LOCATIONS[(LOCATIONS.indexOf(origin) + 1) % LOCATIONS.length];
+      }
+
+      const statusPool: ContainerStatus[] = [
+        "Loaded",
+        "InTransit",
+        "Empty",
+        "Available",
+      ];
+      const status = statusPool[randomInt(0, statusPool.length - 1)];
+
+      const weightKg = randomInt(100, 30000);
+      const volumeM3 = parseFloat((weightKg / 1000).toFixed(2));
+
+      // some containers may not have an assigned date
+      const assignedDate =
+        Math.random() > 0.2
+          ? new Date(Date.now() - randomInt(0, 14) * 86400000).toISOString()
+          : null;
+
+      results.push({
+        containerId,
+        transportId,
+        status,
+        origin,
+        destination,
+        weightKg,
+        volumeM3,
+        assignedDate,
+      });
     }
-
-    const statusPool: ContainerStatus[] = [
-      "Loaded",
-      "InTransit",
-      "Empty",
-      "Available",
-    ];
-    const status = statusPool[randomInt(0, statusPool.length - 1)];
-
-    const weightKg = randomInt(100, 30000);
-    const volumeM3 = parseFloat((weightKg / 1000).toFixed(2));
-
-    // some containers may not have an assigned date
-    const assignedDate =
-      Math.random() > 0.2
-        ? new Date(Date.now() - randomInt(0, 14) * 86400000).toISOString()
-        : null;
-
-    results.push({
-      containerId,
-      transportId,
-      status,
-      origin,
-      destination,
-      weightKg,
-      volumeM3,
-      assignedDate,
-    });
   }
 
   return results;
 }
 
-export const containersData = generateContainers(200, true);
+export const containersData = generateContainers();
 
 export default containersData;

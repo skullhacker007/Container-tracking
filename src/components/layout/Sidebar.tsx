@@ -9,22 +9,26 @@ import {
   Box,
   Map,
   BarChart3,
-  Activity,
-  Settings,
   ChevronLeft,
   ChevronRight,
+  ShoppingCart,
+  Navigation,
+  FileCheck2,
+  ReceiptText,
 } from "lucide-react";
 
 import styles from "@/app/dashboard/layout.module.css";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Orders", href: "/dashboard/orders", icon: ShoppingCart },
   { label: "Transports", href: "/dashboard/transports", icon: Truck },
   { label: "Containers", href: "/dashboard/containers", icon: Box },
   { label: "Routes", href: "/dashboard/routes", icon: Map },
+  { label: "Tracking", href: "/dashboard/tracking", icon: Navigation },
   { label: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
-  { label: "Simulation", href: "/dashboard/simulation", icon: Activity },
-  { label: "Settings", href: "/dashboard/settings", icon: Settings },
+  { label: "Proof of delivery", href: "/dashboard/pod", icon: FileCheck2 },
+  { label: "Invoice", href: "/dashboard/invoice", icon: ReceiptText },
 ];
 
 export function Sidebar() {

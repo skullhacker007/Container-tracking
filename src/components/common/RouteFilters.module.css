@@ -1,0 +1,146 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 90; /* Just below the drawer */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.overlayOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dropdownPanel {
+  position: fixed;
+  top: 0; /* Anchor securely to the absolute top of the viewport */
+  left: 61%;
+  width: 90%;
+  max-width: 900px;
+  transform: translateX(-50%) translateY(-100%); /* Start completely off-screen above */
+  border-top: none; /* Connects smoothly to the viewport top */
+  border-radius: 0 0 0.5rem 0.5rem; /* Slight curve only on bottom edge */
+  padding: 1rem 0; /* Slimmer vertical padding */
+  z-index: 100; /* Ensure it stays above everything */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+  /* Animation states */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdownOpen {
+  transform: translateX(-50%) translateY(0); /* Slide fully into view */
+}
+
+.filterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px; /* Slimmer max-width */
+  gap: 1rem; /* Tighter gap */
+  padding: 0 1.5rem;
+}
+
+.filterGroup {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(30, 41, 59, 0.8);
+  padding: 0.25rem 0.25rem 0.25rem 0.5rem; /* Slimmer internal padding */
+  border-radius: 0.25rem; /* Slight curve */
+  border: 1px solid #334155;
+}
+
+.filterLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.filterSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  width: 100%;
+  border: none;
+  color: #f8fafc;
+  padding: 0.35rem 2rem 0.35rem 0.5rem; /* Slimmer vertical padding */
+  border-radius: 0.25rem;
+  font-size: 0.8rem; /* Slightly smaller text */
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 1px solid #334155; /* Sharp internal divider */
+}
+
+.filterSelect:hover {
+  background: rgba(51, 65, 85, 0.5);
+}
+
+.filterSelect:focus {
+  background: rgba(30, 41, 59, 0.9);
+}
+
+.selectIcon {
+  position: absolute;
+  right: 0.6rem;
+  color: #64748b;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.filterSelect:hover + .selectIcon,
+.filterSelect:focus + .selectIcon {
+  color: #f8fafc;
+}
+
+.actionGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.submitBtn {
+  background: #3b82f6; /* Solid professional blue instead of gradient */
+  color: white;
+  border: 1px solid #2563eb;
+  padding: 0.4rem 1rem; /* Slimmer padding */
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-size: 0.8rem; /* Slightly smaller text */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.submitBtn:hover {
+  background: #2563eb;
+}
+
+.submitBtn:active {
+  background: #1d4ed8;
+  transform: translateY(1px);
+  box-shadow: none;
+}

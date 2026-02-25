@@ -80,7 +80,12 @@ export function RouteMap({ type, from, to, status, departureDate, expectedArriva
 
   return (
     <div className={styles.mapContainer}>
-      <h3 className={styles.title}>Live Route Tracking</h3>
+      <div className={styles.header}>
+        <h3 className={styles.title}>Live Route Tracking</h3>
+        <span className={`${styles.statusBadge} ${styles[`status${status}`]}`}>
+          {status}
+        </span>
+      </div>
       
       <div className={styles.visualizer}>
         {/* Origin */}

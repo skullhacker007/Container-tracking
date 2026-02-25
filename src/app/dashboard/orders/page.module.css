@@ -1,0 +1,187 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0;
+}
+
+.header p {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* ============================
+   TABS NAVIGATION
+============================ */
+.tabs {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 2px solid #334155;
+  padding-bottom: 0;
+  margin-bottom: 1rem;
+}
+
+.tabBtn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.tabBtn:hover {
+  color: #e2e8f0;
+}
+
+.tabBtn.active {
+  color: #38bdf8;
+}
+
+/* The animated underline for active tab */
+.tabBtn::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #38bdf8;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.tabBtn.active::after {
+  transform: scaleX(1);
+}
+
+.tabCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #334155;
+  color: #f8fafc;
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.7rem;
+  margin-left: 0.5rem;
+  font-weight: 700;
+}
+
+.tabBtn.active .tabCount {
+  background-color: #0c4a6e;
+  color: #38bdf8;
+}
+
+/* ============================
+   TABLE STYLES
+============================ */
+.tableContainer {
+  background: #1e293b;
+  border-radius: 0.75rem;
+  border: 1px solid #334155;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  background: #0f172a;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #334155;
+}
+
+.table td {
+  padding: 1rem 1.5rem;
+  color: #e2e8f0;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #334155;
+  vertical-align: middle;
+}
+
+.table tbody tr:hover {
+  background: #334155;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ============================
+   CELL FORMATTING
+============================ */
+.orderId {
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.amount {
+  font-family: monospace;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.emptyState {
+  padding: 3rem;
+  text-align: center;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.badge.ACTIVE {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}
+
+.badge.CLOSED {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+}
+
+.badge.UPCOMING {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+}
+
+.badge.CANCELLED {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}

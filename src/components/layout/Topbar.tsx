@@ -1,26 +1,36 @@
 "use client";
 
-import { Filter, Bell, User } from "lucide-react";
-import styles from "@/app/dashboard/layout.module.css";
+import { useState } from "react";
+import { Bell, User, Filter } from "lucide-react";
+import layoutStyles from "@/app/dashboard/layout.module.css";
+import { RouteFilters } from "@/components/common/RouteFilters";
 
 export function Topbar() {
-  return (
-    <div className={styles.topBar}>
-      <div>
-        <h1 className={styles.pageTitle}>Container Tracking</h1>
-      </div>
+  const [filterOpen, setFilterOpen] = useState(false);
 
-      <div className={styles.headerActions}>
-        <button className={styles.iconBtn}>
+  return (
+    <div className={layoutStyles.topBar}>
+      <div>
+        <h1 className={layoutStyles.pageTitle}>Container Tracking</h1>
+      </div>
+      
+      <div className={layoutStyles.headerActions}>
+        <button 
+          className={layoutStyles.iconBtn}
+          onClick={() => setFilterOpen(!filterOpen)}
+          style={{ backgroundColor: filterOpen ? "rgba(255,255,255,0.1)" : "transparent" }}
+        >
           <Filter size={18} />
         </button>
-        <button className={styles.iconBtn}>
+        <button className={layoutStyles.iconBtn}>
           <Bell size={18} />
         </button>
-        <button className={styles.iconBtn}>
+        <button className={layoutStyles.iconBtn}>
           <User size={18} />
         </button>
       </div>
+
+      <RouteFilters isOpen={filterOpen} onClose={() => setFilterOpen(false)} />
     </div>
   );
 }

@@ -12,6 +12,14 @@ body {
   color: #000;
 }
 
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+}
+
 /* Remove unwanted scroll globally */
 body {
   overflow: hidden;

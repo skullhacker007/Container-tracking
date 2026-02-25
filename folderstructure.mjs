@@ -9,14 +9,17 @@ const baseDir = process.cwd();
 
 const dashboardRoutes = [
   "src/app/dashboard",
+  "src/app/dashboard/orders",
   "src/app/dashboard/transports",
   "src/app/dashboard/transports/[id]",
   "src/app/dashboard/containers",
   "src/app/dashboard/containers/[id]",
   "src/app/dashboard/routes",
   "src/app/dashboard/routes/[id]",
+  "src/app/dashboard/tracking",
   "src/app/dashboard/analytics",
-  "src/app/dashboard/simulation",
+  "src/app/dashboard/pod",
+  "src/app/dashboard/invoice",
   "src/app/dashboard/settings",
 ];
 

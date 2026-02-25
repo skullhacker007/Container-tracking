@@ -25,10 +25,10 @@ export function StatusDonutChart({ data }: StatusDonutChartProps) {
     let live = 0, start = 0, idle = 0, reached = 0;
     
     data.forEach(t => {
-      if (t.status === "Live") live++;
-      if (t.status === "Start") start++;
-      if (t.status === "Idle") idle++;
-      if (t.status === "Reached") reached++;
+      if (t.status === "Live") live += t.totalContainers;
+      if (t.status === "Start") start += t.totalContainers;
+      if (t.status === "Idle") idle += t.totalContainers;
+      if (t.status === "Reached") reached += t.totalContainers;
     });
 
     const total = live + start + idle + reached;
