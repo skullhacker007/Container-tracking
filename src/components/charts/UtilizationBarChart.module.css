@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.barsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.barRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.barInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.typeLabel {
+  color: #f8fafc;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.025em;
+}
+
+.statsLabel {
+  color: #f8fafc;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.muted {
+  color: #64748b;
+  font-weight: 400;
+}
+
+.track {
+  width: 100%;
+  height: 24px;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 999px;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.75rem;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.1);
+}
+
+.percentageLabel {
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  opacity: 0;
+  animation: fadeInLabel 0.5s ease 1s forwards;
+}
+
+@keyframes fadeInLabel {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Gradient Themes */
+.blueTheme {
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+}
+
+.purpleTheme {
+  background: linear-gradient(90deg, #7e22ce, #c084fc);
+}
+
+.orangeTheme {
+  background: linear-gradient(90deg, #c2410c, #fb923c);
+}
+
+.greenTheme {
+  background: linear-gradient(90deg, #15803d, #4ade80);
+}

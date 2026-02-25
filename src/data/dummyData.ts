@@ -23,9 +23,8 @@ export type TransportSummary = {
 
 export const transportSummaryData: TransportSummary[] = [
   // ======================
-  // TRUCKS (3)
+  // TRUCKS
   // ======================
-
   {
     transportId: "TRK-483921",
     type: "Truck",
@@ -60,11 +59,44 @@ export const transportSummaryData: TransportSummary[] = [
     emptySpace: 40,
     status: "Start",
   },
+  {
+    transportId: "TRK-981023",
+    type: "Truck",
+    vehicleNumber: "KA01 EF 8920",
+    carrierName: "Express Roadways",
+    captainOrDriver: "Manish Reddy",
+    contactNumber: "+91 9001122334",
+    departureDate: "2026-02-18T05:00:00Z",
+    expectedArrival: "2026-02-21T14:00:00Z",
+    from: "BLR",
+    to: "CHN",
+    totalContainers: 3,
+    totalSpace: 150,
+    usedSpace: 150,
+    emptySpace: 0,
+    status: "Reached",
+  },
+  {
+    transportId: "TRK-552190",
+    type: "Truck",
+    vehicleNumber: "MH12 GZ 1022",
+    carrierName: "Western Carriers",
+    captainOrDriver: "Santosh Patil",
+    contactNumber: "+91 9988112233",
+    departureDate: "2026-02-24T09:00:00Z",
+    expectedArrival: "2026-02-26T20:00:00Z",
+    from: "MUM",
+    to: "PNQ",
+    totalContainers: 2,
+    totalSpace: 100,
+    usedSpace: 45,
+    emptySpace: 55,
+    status: "Live",
+  },
 
   // ======================
-  // SHIPS (2)
+  // SHIPS
   // ======================
-
   {
     transportId: "SHP-309582",
     type: "Ship",
@@ -97,11 +129,42 @@ export const transportSummaryData: TransportSummary[] = [
     emptySpace: 0,
     status: "Reached",
   },
+  {
+    transportId: "SHP-112093",
+    type: "Ship",
+    carrierName: "Pacific Traders",
+    captainOrDriver: "Captain Zhao",
+    contactNumber: "+65 8123 4567",
+    departureDate: "2026-02-20T10:00:00Z",
+    expectedArrival: "2026-03-10T12:00:00Z",
+    from: "SGP",
+    to: "HKG",
+    totalContainers: 1100,
+    totalSpace: 40000,
+    usedSpace: 12000,
+    emptySpace: 28000,
+    status: "Live",
+  },
+  {
+    transportId: "SHP-661240",
+    type: "Ship",
+    carrierName: "Atlantic Movers",
+    captainOrDriver: "Captain Smith",
+    contactNumber: "+44 7700 900123",
+    departureDate: "2026-02-28T08:00:00Z",
+    expectedArrival: "2026-03-25T14:00:00Z",
+    from: "DXB",
+    to: "LHR",
+    totalContainers: 500,
+    totalSpace: 20000,
+    usedSpace: 5000,
+    emptySpace: 15000,
+    status: "Idle",
+  },
 
   // ======================
-  // FLIGHTS (2)
+  // FLIGHTS
   // ======================
-
   {
     transportId: "FLT-902134",
     type: "Flight",
@@ -136,11 +199,27 @@ export const transportSummaryData: TransportSummary[] = [
     emptySpace: 130,
     status: "Start",
   },
+  {
+    transportId: "FLT-118230",
+    type: "Flight",
+    vehicleNumber: "EK-99",
+    carrierName: "Emirates SkyCargo",
+    captainOrDriver: "Captain Al-Maktoum",
+    contactNumber: "+971 509876543",
+    departureDate: "2026-02-20T01:00:00Z",
+    expectedArrival: "2026-02-20T05:00:00Z",
+    from: "DXB",
+    to: "MUM",
+    totalContainers: 22,
+    totalSpace: 450,
+    usedSpace: 450,
+    emptySpace: 0,
+    status: "Reached",
+  },
 
   // ======================
-  // TRAINS (2)
+  // TRAINS
   // ======================
-
   {
     transportId: "TRN-216759",
     type: "Train",
@@ -175,4 +254,49 @@ export const transportSummaryData: TransportSummary[] = [
     emptySpace: 1200,
     status: "Idle",
   },
+  {
+    transportId: "TRN-901824",
+    type: "Train",
+    vehicleNumber: "NR-901824",
+    carrierName: "Northern Rail Express",
+    captainOrDriver: "Harit Kumar",
+    contactNumber: "+91 9005001000",
+    departureDate: "2026-02-19T05:00:00Z",
+    expectedArrival: "2026-02-21T02:00:00Z",
+    from: "DEL",
+    to: "CCU",
+    totalContainers: 50,
+    totalSpace: 3500,
+    usedSpace: 3400,
+    emptySpace: 100,
+    status: "Reached",
+  },
+];
+
+// ======================
+// NEW ANALYTICS DATA
+// ======================
+
+export type TrendDataPoint = {
+  day: string;
+  shipments: number;
+  revenue: number;
+};
+
+// Represents 14 days of historical trend data
+export const shipmentTrendData: TrendDataPoint[] = [
+  { day: "Feb 12", shipments: 120, revenue: 45000 },
+  { day: "Feb 13", shipments: 135, revenue: 52000 },
+  { day: "Feb 14", shipments: 125, revenue: 48000 },
+  { day: "Feb 15", shipments: 150, revenue: 61000 },
+  { day: "Feb 16", shipments: 180, revenue: 75000 },
+  { day: "Feb 17", shipments: 175, revenue: 72000 },
+  { day: "Feb 18", shipments: 190, revenue: 81000 },
+  { day: "Feb 19", shipments: 210, revenue: 89000 },
+  { day: "Feb 20", shipments: 205, revenue: 86000 },
+  { day: "Feb 21", shipments: 230, revenue: 95000 },
+  { day: "Feb 22", shipments: 250, revenue: 105000 },
+  { day: "Feb 23", shipments: 240, revenue: 99000 },
+  { day: "Feb 24", shipments: 265, revenue: 112000 },
+  { day: "Feb 25", shipments: 290, revenue: 125000 },
 ];

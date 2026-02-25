@@ -1,0 +1,104 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  color: #f8fafc;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+
+.subtitle {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.chartWrapper {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  flex: 1;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.areaAnimation {
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.lineAnimation {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: drawLine 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.dot {
+  transition: all 0.2s ease;
+}
+
+.pointGroup {
+  cursor: pointer;
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  transform: translateY(-110%);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  pointer-events: none;
+  min-width: 120px;
+  animation: tooltipPop 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes tooltipPop {
+  from { opacity: 0; transform: translateY(-90%) scale(0.95); }
+  to { opacity: 1; transform: translateY(-110%) scale(1); }
+}
+
+.ttDate {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.ttRev {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 0.125rem;
+}
+
+.ttShip {
+  font-size: 0.875rem;
+  color: #f8fafc;
+}
