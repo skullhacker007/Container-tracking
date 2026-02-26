@@ -20,14 +20,7 @@ import jsPDF from "jspdf";
 import toast, { Toaster } from "react-hot-toast";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-const getInitials = (name: string) => {
-  if (!name) return "??";
-  const parts = name.split(" ");
-  if (parts.length >= 2) {
-    return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
-  }
-  return name.slice(0, 2).toUpperCase();
-};
+
 const formatUSD = (amount: number) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -311,9 +304,6 @@ export default function InvoicePage() {
 
               {}
               <div className={styles.customerCell}>
-                <div className={styles.avatar}>
-                  {getInitials(invoice.customerName)}
-                </div>
                 <div className={styles.cellContent}>
                   <span className={styles.primaryText}>
                     {invoice.customerName}

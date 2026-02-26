@@ -27,14 +27,7 @@ const TABS: { label: string; value: TabType }[] = [
 ];
 
 const ITEMS_PER_PAGE = 5;
-const getInitials = (name: string) => {
-  if (!name) return "??";
-  const parts = name.split(" ");
-  if (parts.length >= 2) {
-    return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
-  }
-  return name.slice(0, 2).toUpperCase();
-};
+
 
 export default function ProofOfDeliveryPage() {
   const [activeTab, setActiveTab] = useState<TabType>("ALL");
@@ -157,15 +150,12 @@ export default function ProofOfDeliveryPage() {
 
                   {}
                   <div className={styles.driverCell}>
-                    <div className={styles.avatar}>
-                      {getInitials(pod.driverName)}
-                    </div>
                     <div className={styles.cellContent}>
                       <span className={styles.primaryText}>
                         {pod.driverName}
                       </span>
                       <span className={styles.secondaryText}>
-                        {pod.receiverName} (Recv)
+                        {pod.receiverName}
                       </span>
                     </div>
                   </div>
