@@ -13,12 +13,16 @@ export function Topbar() {
       <div>
         <h1 className={layoutStyles.pageTitle}>Container Tracking</h1>
       </div>
-      
+
       <div className={layoutStyles.headerActions}>
-        <button 
+        <button
           className={layoutStyles.iconBtn}
           onClick={() => setFilterOpen(!filterOpen)}
-          style={{ backgroundColor: filterOpen ? "rgba(255,255,255,0.1)" : "transparent" }}
+          style={{
+            backgroundColor: filterOpen
+              ? "rgba(255,255,255,0.1)"
+              : "transparent",
+          }}
         >
           <Filter size={18} />
         </button>

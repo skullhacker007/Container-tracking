@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-width: 1200px;
+  max-width: 75rem;
   margin: 0 auto;
 }
 
@@ -13,7 +13,6 @@
 }
 
 .formCard {
- 
   border-radius: 1rem;
   padding: 2rem;
 }
@@ -44,21 +43,21 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  height: 46px; /* Match height of dropdowns */
+  height: 2.875rem;
   letter-spacing: 0.025em;
 }
 
 .submitBtn:hover:not(:disabled) {
   background-color: #2563eb;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transform: translateY(-0.0625rem);
+  box-shadow: 0 0.25rem 0.75rem rgba(37, 99, 235, 0.3);
 }
 
 .submitBtn:disabled {
   background-color: #1e293b;
   color: #64748b;
   cursor: not-allowed;
-  border: 1px solid #334155;
+  border: 0.0625rem solid #334155;
 }
 
 .mapAnimationWrapper {
@@ -68,7 +67,7 @@
 @keyframes slideFadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1.25rem);
   }
   to {
     opacity: 1;
@@ -76,27 +75,26 @@
   }
 }
 
-/* Responsive constraints */
-@media (max-width: 1024px) {
+@media (max-width: 64rem) {
   .formGrid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .submitWrapper {
     grid-column: span 2;
     margin-top: 1rem;
   }
-  
+
   .submitBtn {
     width: 100%;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 40rem) {
   .formGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .submitWrapper {
     grid-column: 1;
   }

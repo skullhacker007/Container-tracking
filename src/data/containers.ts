@@ -13,7 +13,6 @@ export interface Container {
   assignedDate: string | null;
 }
 
-
 const LOCATIONS = Array.from(
   new Set(transportSummaryData.flatMap((t) => [t.from, t.to])),
 );
@@ -63,8 +62,6 @@ export function generateContainers(): Container[] {
 
       const weightKg = randomInt(100, 30000);
       const volumeM3 = parseFloat((weightKg / 1000).toFixed(2));
-
-      // some containers may not have an assigned date
       const assignedDate =
         Math.random() > 0.2
           ? new Date(Date.now() - randomInt(0, 14) * 86400000).toISOString()

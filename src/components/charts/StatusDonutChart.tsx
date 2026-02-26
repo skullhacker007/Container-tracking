@@ -12,8 +12,6 @@ export function StatusDonutChart({ data }: StatusDonutChartProps) {
   const [mounted, setMounted] = useState(false);
   const RADIUS = 60;
   const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
-
-  // Run entrance animation on mount
   useEffect(() => {
     const timer = setTimeout(() => {
       setMounted(true);
@@ -22,9 +20,12 @@ export function StatusDonutChart({ data }: StatusDonutChartProps) {
   }, []);
 
   const chartData = useMemo(() => {
-    let live = 0, start = 0, idle = 0, reached = 0;
-    
-    data.forEach(t => {
+    let live = 0,
+      start = 0,
+      idle = 0,
+      reached = 0;
+
+    data.forEach((t) => {
       if (t.status === "Live") live += t.totalContainers;
       if (t.status === "Start") start += t.totalContainers;
       if (t.status === "Idle") idle += t.totalContainers;
@@ -32,15 +33,10 @@ export function StatusDonutChart({ data }: StatusDonutChartProps) {
     });
 
     const total = live + start + idle + reached;
-    
-    // Percentages
     const pLive = (live / total) * 100 || 0;
     const pStart = (start / total) * 100 || 0;
     const pIdle = (idle / total) * 100 || 0;
     const pReached = (reached / total) * 100 || 0;
-
-    // SVG dasharray calculations: {dash} {gap}
-    // and dashoffset calculations to stack the slices around the circle
     const cLive = (pLive / 100) * CIRCUMFERENCE;
     const cStart = (pStart / 100) * CIRCUMFERENCE;
     const cIdle = (pIdle / 100) * CIRCUMFERENCE;
@@ -49,21 +45,45 @@ export function StatusDonutChart({ data }: StatusDonutChartProps) {
     return {
       total,
       slices: [
-        { label: "Live", value: live, color: "#38bdf8", stroke: cLive, offset: 0 },
-        { label: "Start", value: start, color: "#a855f7", stroke: cStart, offset: -cLive },
-        { label: "Idle", value: idle, color: "#f97316", stroke: cIdle, offset: -(cLive + cStart) },
-        { label: "Reached", value: reached, color: "#22c55e", stroke: cReached, offset: -(cLive + cStart + cIdle) }
-      ]
+        {
+          label: "Live",
+          value: live,
+          color: "#38bdf8",
+          stroke: cLive,
+          offset: 0,
+        },
+        {
+          label: "Start",
+          value: start,
+          color: "#a855f7",
+          stroke: cStart,
+          offset: -cLive,
+        },
+        {
+          label: "Idle",
+          value: idle,
+          color: "#f97316",
+          stroke: cIdle,
+          offset: -(cLive + cStart),
+        },
+        {
+          label: "Reached",
+          value: reached,
+          color: "#22c55e",
+          stroke: cReached,
+          offset: -(cLive + cStart + cIdle),
+        },
+      ],
     };
   }, [data, CIRCUMFERENCE]);
 
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Status Distribution</h3>
-      
+
       <div className={styles.chartWrapper}>
         <svg viewBox="0 0 160 160" className={styles.svg}>
-          {/* Background Track */}
+          {}
           <circle
             cx="80"
             cy="80"
@@ -72,42 +92,46 @@ export function StatusDonutChart({ data }: StatusDonutChartProps) {
             stroke="rgba(51, 65, 85, 0.4)"
             strokeWidth="20"
           />
-          
-          {/* Data Slices */}
-          {chartData.slices.map((slice, i) => (
-            slice.value > 0 && (
-              <circle
-                key={slice.label}
-                cx="80"
-                cy="80"
-                r={RADIUS}
-                fill="transparent"
-                stroke={slice.color}
-                strokeWidth="20"
-                strokeDasharray={`${slice.stroke} ${CIRCUMFERENCE}`}
-                strokeDashoffset={mounted ? slice.offset : 0}
-                className={styles.slice}
-                style={{ 
-                  transitionDelay: `${i * 150}ms`,
-                  opacity: mounted ? 1 : 0
-                }}
-              />
-            )
-          ))}
+
+          {}
+          {chartData.slices.map(
+            (slice, i) =>
+              slice.value > 0 && (
+                <circle
+                  key={slice.label}
+                  cx="80"
+                  cy="80"
+                  r={RADIUS}
+                  fill="transparent"
+                  stroke={slice.color}
+                  strokeWidth="20"
+                  strokeDasharray={`${slice.stroke} ${CIRCUMFERENCE}`}
+                  strokeDashoffset={mounted ? slice.offset : 0}
+                  className={styles.slice}
+                  style={{
+                    transitionDelay: `${i * 150}ms`,
+                    opacity: mounted ? 1 : 0,
+                  }}
+                />
+              ),
+          )}
         </svg>
 
-        {/* Center Total Text */}
+        {}
         <div className={styles.centerText}>
           <span className={styles.totalValue}>{chartData.total}</span>
           <span className={styles.totalLabel}>Total</span>
         </div>
       </div>
 
-      {/* Legend */}
+      {}
       <div className={styles.legend}>
         {chartData.slices.map((slice) => (
           <div key={slice.label} className={styles.legendItem}>
-            <span className={styles.dot} style={{ backgroundColor: slice.color }}></span>
+            <span
+              className={styles.dot}
+              style={{ backgroundColor: slice.color }}
+            ></span>
             <span className={styles.legendLabel}>{slice.label}</span>
             <span className={styles.legendValue}>{slice.value}</span>
           </div>

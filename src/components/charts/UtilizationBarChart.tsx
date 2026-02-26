@@ -19,7 +19,6 @@ export function UtilizationBarChart({ data }: UtilizationBarChartProps) {
   }, []);
 
   const chartData = useMemo(() => {
-    // Group volume data by transport type
     const groups: Record<string, { used: number; total: number }> = {
       Ship: { used: 0, total: 0 },
       Train: { used: 0, total: 0 },
@@ -27,18 +26,14 @@ export function UtilizationBarChart({ data }: UtilizationBarChartProps) {
       Truck: { used: 0, total: 0 },
     };
 
-    data.forEach(t => {
+    data.forEach((t) => {
       if (groups[t.type]) {
         groups[t.type].used += t.usedSpace;
         groups[t.type].total += t.totalSpace;
       }
     });
-
-    // Calculate percentages and formatting
     return Object.entries(groups).map(([type, stats]) => {
       const percentage = stats.total > 0 ? (stats.used / stats.total) * 100 : 0;
-      
-      // Assign custom gradient themes based on type
       let gradientClass = styles.blueTheme;
       if (type === "Train") gradientClass = styles.purpleTheme;
       else if (type === "Flight") gradientClass = styles.orangeTheme;
@@ -49,32 +44,32 @@ export function UtilizationBarChart({ data }: UtilizationBarChartProps) {
         percentage,
         usedFormatted: stats.used.toLocaleString(),
         totalFormatted: stats.total.toLocaleString(),
-        theme: gradientClass
+        theme: gradientClass,
       };
     });
   }, [data]);
 
   return (
     <div className={styles.container}>
-      {/* Header handled by parent layout */}
-      
+      {}
+
       <div className={styles.barsList}>
         {chartData.map((item, i) => (
           <div key={item.type} className={styles.barRow}>
-            
             <div className={styles.barInfo}>
               <span className={styles.typeLabel}>{item.type}</span>
               <span className={styles.statsLabel}>
-                {item.usedFormatted} <span className={styles.muted}>/ {item.totalFormatted} m³</span>
+                {item.usedFormatted}{" "}
+                <span className={styles.muted}>/ {item.totalFormatted} m³</span>
               </span>
             </div>
 
             <div className={styles.track}>
-              <div 
+              <div
                 className={`${styles.fill} ${item.theme}`}
-                style={{ 
-                  width: mounted ? `${item.percentage}%` : '0%',
-                  transitionDelay: `${i * 100}ms`
+                style={{
+                  width: mounted ? `${item.percentage}%` : "0%",
+                  transitionDelay: `${i * 100}ms`,
                 }}
               >
                 {mounted && item.percentage > 5 && (
@@ -84,7 +79,6 @@ export function UtilizationBarChart({ data }: UtilizationBarChartProps) {
                 )}
               </div>
             </div>
-
           </div>
         ))}
       </div>

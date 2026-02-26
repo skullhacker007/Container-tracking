@@ -12,7 +12,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ShoppingCart,
-  Navigation,
   FileCheck2,
   ReceiptText,
 } from "lucide-react";
@@ -25,7 +24,6 @@ const NAV_ITEMS = [
   { label: "Transports", href: "/dashboard/transports", icon: Truck },
   { label: "Containers", href: "/dashboard/containers", icon: Box },
   { label: "Routes", href: "/dashboard/routes", icon: Map },
-  // { label: "Tracking", href: "/dashboard/tracking", icon: Navigation },
   { label: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
   { label: "Proof of delivery", href: "/dashboard/pod", icon: FileCheck2 },
   { label: "Invoice", href: "/dashboard/invoice", icon: ReceiptText },
@@ -36,9 +34,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside
-      className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}
-    >
+    <aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}>
       <div className={styles.topSection}>
         {!collapsed && <h2 className={styles.logo}>Dot Phoenix Solutions</h2>}
         <button
@@ -66,9 +62,7 @@ export function Sidebar() {
               <span className={styles.icon}>
                 <Icon size={18} />
               </span>
-              {!collapsed && (
-                <span className={styles.label}>{item.label}</span>
-              )}
+              {!collapsed && <span className={styles.label}>{item.label}</span>}
             </Link>
           );
         })}

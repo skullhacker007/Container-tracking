@@ -5,9 +5,9 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 90; /* Just below the drawer */
+  backdrop-filter: blur(0.25rem);
+  -webkit-backdrop-filter: blur(0.25rem);
+  z-index: 90;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -20,25 +20,24 @@
 
 .dropdownPanel {
   position: fixed;
-  top: 0; /* Anchor securely to the absolute top of the viewport */
+  top: 0;
   left: 61%;
   width: 90%;
-  max-width: 900px;
-  transform: translateX(-50%) translateY(-100%); /* Start completely off-screen above */
-  border-top: none; /* Connects smoothly to the viewport top */
-  border-radius: 0 0 0.5rem 0.5rem; /* Slight curve only on bottom edge */
-  padding: 1rem 0; /* Slimmer vertical padding */
-  z-index: 100; /* Ensure it stays above everything */
+  max-width: 56.25rem;
+  transform: translateX(-50%) translateY(-100%);
+  border-top: none;
+  border-radius: 0 0 0.5rem 0.5rem;
+  padding: 1rem 0;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
- 
-  /* Animation states */
+
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dropdownOpen {
-  transform: translateX(-50%) translateY(0); /* Slide fully into view */
+  transform: translateX(-50%) translateY(0);
 }
 
 .filterRow {
@@ -46,8 +45,8 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 800px; /* Slimmer max-width */
-  gap: 1rem; /* Tighter gap */
+  max-width: 50rem;
+  gap: 1rem;
   padding: 0 1.5rem;
 }
 
@@ -57,9 +56,9 @@
   align-items: center;
   gap: 0.5rem;
   background: rgba(30, 41, 59, 0.8);
-  padding: 0.25rem 0.25rem 0.25rem 0.5rem; /* Slimmer internal padding */
-  border-radius: 0.25rem; /* Slight curve */
-  border: 1px solid #334155;
+  padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 0.0625rem solid #334155;
 }
 
 .filterLabel {
@@ -84,14 +83,14 @@
   width: 100%;
   border: none;
   color: #f8fafc;
-  padding: 0.35rem 2rem 0.35rem 0.5rem; /* Slimmer vertical padding */
+  padding: 0.35rem 2rem 0.35rem 0.5rem;
   border-radius: 0.25rem;
-  font-size: 0.8rem; /* Slightly smaller text */
+  font-size: 0.8rem;
   font-weight: 500;
   outline: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-left: 1px solid #334155; /* Sharp internal divider */
+  border-left: 0.0625rem solid #334155;
 }
 
 .filterSelect:hover {
@@ -123,16 +122,16 @@
 }
 
 .submitBtn {
-  background: #3b82f6; /* Solid professional blue instead of gradient */
+  background: #3b82f6;
   color: white;
-  border: 1px solid #2563eb;
-  padding: 0.4rem 1rem; /* Slimmer padding */
+  border: 0.0625rem solid #2563eb;
+  padding: 0.4rem 1rem;
   border-radius: 0.25rem;
   font-weight: 600;
-  font-size: 0.8rem; /* Slightly smaller text */
+  font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);
 }
 
 .submitBtn:hover {
@@ -141,6 +140,6 @@
 
 .submitBtn:active {
   background: #1d4ed8;
-  transform: translateY(1px);
+  transform: translateY(0.0625rem);
   box-shadow: none;
 }

@@ -23,8 +23,6 @@ export function FilterProvider({ children }: { children: ReactNode }) {
   });
 
   const [prevPathname, setPrevPathname] = useState(pathname);
-
-  // Reset filters when the route changes (best practice vs useEffect)
   if (pathname !== prevPathname) {
     setPrevPathname(pathname);
     setFilters({ type: "", status: "" });

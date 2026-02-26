@@ -18,8 +18,8 @@
   justify-content: center;
   align-items: center;
   margin: auto;
-  width: 200px;
-  height: 200px;
+  width: 12.5rem;
+  height: 12.5rem;
 }
 
 .svg {
@@ -30,13 +30,15 @@
 }
 
 .slice {
-  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-out;
+  transition:
+    stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.5s ease-out;
   cursor: pointer;
 }
 
 .slice:hover {
   stroke-width: 24;
-  filter: drop-shadow(0 0 10px currentColor);
+  filter: drop-shadow(0 0 0.625rem currentColor);
 }
 
 .centerText {
@@ -64,14 +66,13 @@
   margin-top: 0.25rem;
 }
 
-/* Legend */
 .legend {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(51, 65, 85, 0.5);
+  border-top: 0.0625rem solid rgba(51, 65, 85, 0.5);
 }
 
 .legendItem {
@@ -81,10 +82,10 @@
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
+  width: 0.75rem;
+  height: 0.75rem;
   border-radius: 50%;
-  box-shadow: 0 0 8px currentColor;
+  box-shadow: 0 0 0.5rem currentColor;
 }
 
 .legendLabel {

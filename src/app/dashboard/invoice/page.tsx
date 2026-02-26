@@ -3,14 +3,23 @@
 import { useState, useRef, useMemo } from "react";
 import styles from "./page.module.css";
 import { invoiceData, Invoice, podData, InvoiceStatus } from "@/data/dummyData";
-import { Download, Plus, Eye, ChevronLeft, ChevronRight, X, Truck, Ship, Plane, Train } from "lucide-react";
+import {
+  Download,
+  Plus,
+  Eye,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Truck,
+  Ship,
+  Plane,
+  Train,
+} from "lucide-react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import toast, { Toaster } from "react-hot-toast";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-// Helper to extract initials for avatar
 const getInitials = (name: string) => {
   if (!name) return "??";
   const parts = name.split(" ");
@@ -19,14 +28,10 @@ const getInitials = (name: string) => {
   }
   return name.slice(0, 2).toUpperCase();
 };
-
-// Calculate metrics removed from global scope to be reactive inside component
-
-// Format currency
 const formatUSD = (amount: number) => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
   }).format(amount);
 };
 
@@ -35,59 +40,62 @@ export default function InvoicePage() {
   const [previewInvoice, setPreviewInvoice] = useState<Invoice | null>(null);
   const [isDownloading, setIsDownloading] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  
-  // Drawer State
   const [selectedPodId, setSelectedPodId] = useState("");
   const [invoiceDate, setInvoiceDate] = useState<Date | null>(new Date());
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
   const [invoiceStatus, setInvoiceStatus] = useState<InvoiceStatus>("Pending");
-  
+
   const pdfRef = useRef<HTMLDivElement>(null);
   const ITEMS_PER_PAGE = 5;
-
-  // Dynamically calculate metrics based purely on generated invoiceData
-  const { totalOutstanding, totalPaid, totalPending, totalOverdue } = useMemo(() => {
-    let out = 0, paid = 0, pend = 0, over = 0;
-    invoiceData.forEach(inv => {
-      out += inv.amount;
-      if (inv.status === "Paid") paid += inv.amount;
-      else if (inv.status === "Pending") pend += inv.amount;
-      else if (inv.status === "Overdue") over += inv.amount;
-    });
-    return { 
-      totalOutstanding: out, 
-      totalPaid: paid, 
-      totalPending: pend, 
-      totalOverdue: over 
-    };
-  }, []);
+  const { totalOutstanding, totalPaid, totalPending, totalOverdue } =
+    useMemo(() => {
+      let out = 0,
+        paid = 0,
+        pend = 0,
+        over = 0;
+      invoiceData.forEach((inv) => {
+        out += inv.amount;
+        if (inv.status === "Paid") paid += inv.amount;
+        else if (inv.status === "Pending") pend += inv.amount;
+        else if (inv.status === "Overdue") over += inv.amount;
+      });
+      return {
+        totalOutstanding: out,
+        totalPaid: paid,
+        totalPending: pend,
+        totalOverdue: over,
+      };
+    }, []);
 
   const approvedPODsWithoutInvoice = useMemo(() => {
-    return podData.filter(pod => pod.status === "APPROVED");
+    return podData.filter((pod) => pod.status === "APPROVED");
   }, []);
 
   const selectedPod = useMemo(() => {
-    return approvedPODsWithoutInvoice.find(p => p.id === selectedPodId) || null;
+    return (
+      approvedPODsWithoutInvoice.find((p) => p.id === selectedPodId) || null
+    );
   }, [selectedPodId, approvedPODsWithoutInvoice]);
 
   const nextInvoiceId = useMemo(() => {
     if (!selectedPod) return `INV-2026-00${invoiceData.length + 1}`;
-    const duplicateInvoices = invoiceData.filter(inv => inv.orderId === selectedPod.orderId).length;
-    return duplicateInvoices > 0 ? `INV${duplicateInvoices + 1}` : `INV-2026-00${invoiceData.length + 1}`;
+    const duplicateInvoices = invoiceData.filter(
+      (inv) => inv.orderId === selectedPod.orderId,
+    ).length;
+    return duplicateInvoices > 0
+      ? `INV${duplicateInvoices + 1}`
+      : `INV-2026-00${invoiceData.length + 1}`;
   }, [selectedPod]);
 
   const totalPages = Math.ceil(invoiceData.length / ITEMS_PER_PAGE) || 1;
   const paginatedInvoices = invoiceData.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    currentPage * ITEMS_PER_PAGE,
   );
 
   const handleDownload = async (invoice: Invoice) => {
-    // If not previewing, we can't capture the div immediately because it's rendering.
-    // For this, we'll just open the preview and then handle the visual PDF capture.
     if (!previewInvoice || previewInvoice.id !== invoice.id) {
       setPreviewInvoice(invoice);
-      // Let React render the modal first
       setTimeout(() => executeDownload(invoice), 300);
     } else {
       executeDownload(invoice);
@@ -99,8 +107,6 @@ export default function InvoicePage() {
     try {
       setIsDownloading(true);
       const input = pdfRef.current;
-      
-      // html2canvas config for high-quality snapshot
       const canvas = await html2canvas(input, {
         scale: 2, // 2x resolution
         useCORS: true,
@@ -108,8 +114,6 @@ export default function InvoicePage() {
       });
 
       const imgData = canvas.toDataURL("image/png");
-      
-      // Calculate aspect ratio for A4 PDF keeping proportions
       const pdf = new jsPDF("p", "mm", "a4");
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
@@ -124,8 +128,19 @@ export default function InvoicePage() {
   };
 
   const handleExportCsv = () => {
-    const headers = ["Invoice ID", "POD ID", "Load ID", "Type", "Customer", "Email", "Contact", "Amount", "Due Date", "Status"];
-    const rows = invoiceData.map(inv => [
+    const headers = [
+      "Invoice ID",
+      "POD ID",
+      "Load ID",
+      "Type",
+      "Customer",
+      "Email",
+      "Contact",
+      "Amount",
+      "Due Date",
+      "Status",
+    ];
+    const rows = invoiceData.map((inv) => [
       inv.id,
       inv.podId,
       inv.orderId,
@@ -135,10 +150,13 @@ export default function InvoicePage() {
       `"${inv.customerContact}"`,
       inv.amount.toString(),
       inv.dueDate,
-      inv.status
+      inv.status,
     ]);
-    
-    const csvContent = [headers.join(","), ...rows.map(row => row.join(","))].join("\n");
+
+    const csvContent = [
+      headers.join(","),
+      ...rows.map((row) => row.join(",")),
+    ].join("\n");
     const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -150,23 +168,23 @@ export default function InvoicePage() {
 
   const handleCreateInvoice = () => {
     if (!selectedPodId || !invoiceDate || !dueDate) {
-      toast.error("Please fill in all required fields", { style: { background: '#1e293b', color: '#fff' }});
+      toast.error("Please fill in all required fields", {
+        style: { background: "#1e293b", color: "#fff" },
+      });
       return;
     }
-
-    // Success Royal Toast
     toast.success(`Invoice created for ${selectedPod?.orderId}`, {
-      position: 'bottom-right',
+      position: "bottom-right",
       style: {
-        background: 'linear-gradient(to right, #1e3a8a, #3b82f6)',
-        color: '#ffffff',
-        border: '1px solid #60a5fa',
-        padding: '16px',
-        fontWeight: 'bold',
+        background: "linear-gradient(to right, #1e3a8a, #3b82f6)",
+        color: "#ffffff",
+        border: "0.0625rem solid #60a5fa",
+        padding: "1rem",
+        fontWeight: "bold",
       },
       iconTheme: {
-        primary: '#fcd34d',
-        secondary: '#1e3a8a',
+        primary: "#fcd34d",
+        secondary: "#1e3a8a",
       },
     });
 
@@ -177,8 +195,8 @@ export default function InvoicePage() {
   return (
     <div className={styles.container}>
       <Toaster />
-      
-      {/* Header Area */}
+
+      {}
       <div className={styles.header}>
         <div className={styles.titleArea}>
           <h2>BILLING & INVOICES</h2>
@@ -188,131 +206,197 @@ export default function InvoicePage() {
           <button className={styles.btnSecondary} onClick={handleExportCsv}>
             <Download size={16} /> Export Data
           </button>
-          <button className={styles.btnPrimary} onClick={() => setIsDrawerOpen(true)}>
+          <button
+            className={styles.btnPrimary}
+            onClick={() => setIsDrawerOpen(true)}
+          >
             <Plus size={16} /> Create Invoice
           </button>
         </div>
       </div>
 
-      {/* Metrics Bar */}
+      {}
       <div className={styles.metricsBar}>
-        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "1.5rem",
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
           <div className={styles.metricItem}>
-            Total Outstanding: <span className={styles.metricValue}>{formatUSD(totalOutstanding)}</span>
+            Total Outstanding:{" "}
+            <span className={styles.metricValue}>
+              {formatUSD(totalOutstanding)}
+            </span>
           </div>
           <div className={styles.metricItem}>
-            Paid: <span className={`${styles.metricBadge} ${styles.badgePaid}`}>{formatUSD(totalPaid)}</span>
+            Paid:{" "}
+            <span className={`${styles.metricBadge} ${styles.badgePaid}`}>
+              {formatUSD(totalPaid)}
+            </span>
           </div>
           <div className={styles.metricItem}>
-            Pending: <span className={`${styles.metricBadge} ${styles.badgePending}`}>{formatUSD(totalPending)}</span>
+            Pending:{" "}
+            <span className={`${styles.metricBadge} ${styles.badgePending}`}>
+              {formatUSD(totalPending)}
+            </span>
           </div>
           <div className={styles.metricItem}>
-            Overdue: <span className={`${styles.metricBadge} ${styles.badgeOverdue}`}>{formatUSD(totalOverdue)}</span>
+            Overdue:{" "}
+            <span className={`${styles.metricBadge} ${styles.badgeOverdue}`}>
+              {formatUSD(totalOverdue)}
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Data Grid listContainer */}
+      {}
       <div className={styles.listContainer}>
-        {/* Table Header Row */}
+        {}
         <div className={styles.listHeader}>
           <div className={styles.headerCell}>INVOICE #</div>
           <div className={styles.headerCell}>POD ID</div>
           <div className={styles.headerCell}>LOAD ID</div>
-          <div className={styles.headerCell} style={{ textAlign: "center" }}>TYPE</div>
+          <div className={styles.headerCell} style={{ textAlign: "center" }}>
+            TYPE
+          </div>
           <div className={styles.headerCell}>CUSTOMER</div>
           <div className={styles.headerCell}>AMOUNT</div>
           <div className={styles.headerCell}>DUE DATE</div>
           <div className={styles.headerCell}>STATUS</div>
-          <div className={styles.headerCell} style={{ textAlign: "center" }}>ACTIONS</div>
+          <div className={styles.headerCell} style={{ textAlign: "center" }}>
+            ACTIONS
+          </div>
         </div>
 
-        {/* List Items */}
+        {}
         {paginatedInvoices.length > 0 ? (
           paginatedInvoices.map((invoice) => (
             <div key={invoice.id} className={styles.listItem}>
-              
-              {/* Invoice # */}
+              {}
               <div className={styles.cellContent}>
                 <span className={styles.primaryText}>{invoice.id}</span>
               </div>
 
-              {/* POD ID */}
+              {}
               <div className={styles.cellContent}>
                 <span className={styles.primaryText}>{invoice.podId}</span>
               </div>
 
-              {/* Load ID */}
+              {}
               <div className={styles.cellContent}>
                 <span className={styles.primaryText}>{invoice.orderId}</span>
               </div>
 
-              {/* Type */}
-              <div className={styles.cellContent} style={{ alignItems: "center", justifyContent: "center" }}>
-                {invoice.type === "Truck" && <Truck size={20} className={styles.secondaryText} />}
-                {invoice.type === "Ship" && <Ship size={20} className={styles.secondaryText} />}
-                {invoice.type === "Flight" && <Plane size={20} className={styles.secondaryText} />}
-                {invoice.type === "Train" && <Train size={20} className={styles.secondaryText} />}
+              {}
+              <div
+                className={styles.cellContent}
+                style={{ alignItems: "center", justifyContent: "center" }}
+              >
+                {invoice.type === "Truck" && (
+                  <Truck size={20} className={styles.secondaryText} />
+                )}
+                {invoice.type === "Ship" && (
+                  <Ship size={20} className={styles.secondaryText} />
+                )}
+                {invoice.type === "Flight" && (
+                  <Plane size={20} className={styles.secondaryText} />
+                )}
+                {invoice.type === "Train" && (
+                  <Train size={20} className={styles.secondaryText} />
+                )}
               </div>
 
-              {/* Customer */}
+              {}
               <div className={styles.customerCell}>
-                <div className={styles.avatar}>{getInitials(invoice.customerName)}</div>
+                <div className={styles.avatar}>
+                  {getInitials(invoice.customerName)}
+                </div>
                 <div className={styles.cellContent}>
-                  <span className={styles.primaryText}>{invoice.customerName}</span>
-                  <span className={styles.secondaryText}>{invoice.customerEmail}</span>
-                  <span className={styles.secondaryText}>{invoice.customerContact}</span>
+                  <span className={styles.primaryText}>
+                    {invoice.customerName}
+                  </span>
+                  <span className={styles.secondaryText}>
+                    {invoice.customerEmail}
+                  </span>
+                  <span className={styles.secondaryText}>
+                    {invoice.customerContact}
+                  </span>
                 </div>
               </div>
 
-              {/* Amount */}
+              {}
               <div className={styles.cellContent}>
-                <span className={styles.amountText}>{formatUSD(invoice.amount)}</span>
+                <span className={styles.amountText}>
+                  {formatUSD(invoice.amount)}
+                </span>
               </div>
 
-              {/* Due Date */}
+              {}
               <div className={styles.cellContent}>
-                <span className={styles.primaryText}>
-                  {invoice.dueDate}
-                </span>
-                {/* Conditional color for secondary text based on specific daysInfo mock string */}
-                <span className={
-                    invoice.daysInfo?.includes("overdue") ? styles.statusOverdueText : 
-                    invoice.daysInfo?.includes("on time") ? styles.statusPaidText : 
-                    styles.secondaryText
+                <span className={styles.primaryText}>{invoice.dueDate}</span>
+                {}
+                <span
+                  className={
+                    invoice.daysInfo?.includes("overdue")
+                      ? styles.statusOverdueText
+                      : invoice.daysInfo?.includes("on time")
+                        ? styles.statusPaidText
+                        : styles.secondaryText
                   }
                 >
                   {invoice.daysInfo}
                 </span>
               </div>
 
-              {/* Status */}
-              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-                <span className={`${styles.metricBadge} ${styles[`badge${invoice.status}`]}`}>
+              {}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <span
+                  className={`${styles.metricBadge} ${styles[`badge${invoice.status}`]}`}
+                >
                   {invoice.status}
                 </span>
               </div>
 
-              {/* Actions */}
+              {}
               <div className={styles.actionsCell}>
-                 <button className={styles.actionBtn} onClick={() => setPreviewInvoice(invoice)}>
-                   <Eye size={18} />
-                 </button>
-                 <button className={styles.actionBtn} onClick={() => handleDownload(invoice)}>
-                   <Download size={18} />
-                 </button>
+                <button
+                  className={styles.actionBtn}
+                  onClick={() => setPreviewInvoice(invoice)}
+                >
+                  <Eye size={18} />
+                </button>
+                <button
+                  className={styles.actionBtn}
+                  onClick={() => handleDownload(invoice)}
+                >
+                  <Download size={18} />
+                </button>
               </div>
             </div>
           ))
         ) : (
-          <div style={{ padding: "3rem", textAlign: "center", color: "#64748b" }}>
+          <div
+            style={{ padding: "3rem", textAlign: "center", color: "#64748b" }}
+          >
             No invoices found.
           </div>
         )}
 
-        {/* Pagination - Standard Format */}
+        {}
         {totalPages > 1 && (
-          <div className="paginationContainer" style={{ borderTop: "1px solid #334155" }}>
+          <div
+            className="paginationContainer"
+            style={{ borderTop: "0.0625rem solid #334155" }}
+          >
             <button
               className="paginationBtn"
               disabled={currentPage === 1}
@@ -347,27 +431,35 @@ export default function InvoicePage() {
             </button>
           </div>
         )}
-
       </div>
 
-      {/* Invoice JSX Preview Modal */}
+      {}
       {previewInvoice && (
-        <div className={styles.modalOverlay} onClick={() => setPreviewInvoice(null)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            {/* Modal Header */}
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setPreviewInvoice(null)}
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {}
             <div className={styles.modalHeader}>
               <h3>Invoice Preview</h3>
-              <button className={styles.modalCloseBtn} onClick={() => setPreviewInvoice(null)}>
+              <button
+                className={styles.modalCloseBtn}
+                onClick={() => setPreviewInvoice(null)}
+              >
                 <X size={20} />
               </button>
             </div>
 
-            {/* Modal Body / Invoice Template */}
+            {}
             <div className={styles.modalBody}>
-              <div 
-                ref={pdfRef} 
-                className={`${styles.invoiceTemplate} ${styles.printableArea}`} 
-                style={{ padding: '3rem' }} // ensure exact styles for screenshot
+              <div
+                ref={pdfRef}
+                className={`${styles.invoiceTemplate} ${styles.printableArea}`}
+                style={{ padding: "3rem" }} // ensure exact styles for screenshot
               >
                 <div className={styles.invoiceHeader}>
                   <div className={styles.invoiceLogo}>
@@ -377,7 +469,7 @@ export default function InvoicePage() {
                     <h2>INVOICE {previewInvoice.id}</h2>
                     <p>Date: {previewInvoice.createdDate}</p>
                     <p>Due: {previewInvoice.dueDate}</p>
-                    <p style={{ marginTop: '0.25rem' }}>
+                    <p style={{ marginTop: "0.25rem" }}>
                       <strong>Transport:</strong> {previewInvoice.type}
                     </p>
                   </div>
@@ -387,16 +479,20 @@ export default function InvoicePage() {
                   <div className={styles.invoiceCol}>
                     <h4>Billed To</h4>
                     <p>
-                      <strong>{previewInvoice.customerName}</strong><br />
-                      {previewInvoice.customerEmail}<br />
+                      <strong>{previewInvoice.customerName}</strong>
+                      <br />
+                      {previewInvoice.customerEmail}
+                      <br />
                       {previewInvoice.customerContact}
                     </p>
                   </div>
                   <div className={styles.invoiceCol}>
                     <h4>From</h4>
                     <p>
-                      <strong>Cargo Logistics Inc.</strong><br />
-                      billing@cargo.com<br />
+                      <strong>Cargo Logistics Inc.</strong>
+                      <br />
+                      billing@cargo.com
+                      <br />
                       123 Freight Ave.
                     </p>
                   </div>
@@ -421,46 +517,75 @@ export default function InvoicePage() {
 
                 <div className={styles.invoiceTotalRow}>
                   <span>Total Amount Due</span>
-                  <span className={styles.bigAmount}>{formatUSD(previewInvoice.amount)}</span>
+                  <span className={styles.bigAmount}>
+                    {formatUSD(previewInvoice.amount)}
+                  </span>
                 </div>
               </div>
             </div>
-            
+
             <div className={styles.modalFooter}>
-              <button className={styles.btnSecondary} onClick={() => setPreviewInvoice(null)} disabled={isDownloading}>
+              <button
+                className={styles.btnSecondary}
+                onClick={() => setPreviewInvoice(null)}
+                disabled={isDownloading}
+              >
                 Close
               </button>
-              <button className={styles.btnPrimary} onClick={() => handleDownload(previewInvoice)} disabled={isDownloading}>
-                <Download size={16} /> {isDownloading ? "Generating..." : "Download Screenshot"}
+              <button
+                className={styles.btnPrimary}
+                onClick={() => handleDownload(previewInvoice)}
+                disabled={isDownloading}
+              >
+                <Download size={16} />{" "}
+                {isDownloading ? "Generating..." : "Download Screenshot"}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Create Invoice Drawer */}
+      {}
       {isDrawerOpen && (
-        <div className={styles.modalOverlay} onClick={() => setIsDrawerOpen(false)}>
-          <div className={styles.drawerContent} onClick={(e) => e.stopPropagation()}>
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setIsDrawerOpen(false)}
+        >
+          <div
+            className={styles.drawerContent}
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className={styles.drawerHeader}>
               <h3>Create New Invoice</h3>
-              <button className={styles.modalCloseBtn} onClick={() => setIsDrawerOpen(false)}>
+              <button
+                className={styles.modalCloseBtn}
+                onClick={() => setIsDrawerOpen(false)}
+              >
                 <X size={20} />
               </button>
             </div>
             <div className={styles.drawerBody}>
-              
-              {/* Auto-generated Invoice ID */}
-              <div className={styles.autoFetchBox} style={{ borderColor: '#4ade80', background: 'rgba(34, 197, 94, 0.05)' }}>
+              {}
+              <div
+                className={styles.autoFetchBox}
+                style={{
+                  borderColor: "#4ade80",
+                  background: "rgba(34, 197, 94, 0.05)",
+                }}
+              >
                 <div className={styles.autoRow}>
-                  <span style={{ color: '#4ade80' }}>Next Invoice ID (Auto):</span>
-                  <strong style={{ fontSize: '1.1rem' }}>{nextInvoiceId}</strong>
+                  <span style={{ color: "#4ade80" }}>
+                    Next Invoice ID (Auto):
+                  </span>
+                  <strong style={{ fontSize: "1.1rem" }}>
+                    {nextInvoiceId}
+                  </strong>
                 </div>
               </div>
 
               <div className={styles.formGroup}>
                 <label>Select Approved Load ID</label>
-                <select 
+                <select
                   className={styles.drawerSelect}
                   value={selectedPodId}
                   onChange={(e) => setSelectedPodId(e.target.value)}
@@ -473,8 +598,8 @@ export default function InvoicePage() {
                   ))}
                 </select>
               </div>
-              
-              {/* Auto-fetched Details */}
+
+              {}
               {selectedPod && (
                 <div className={styles.autoFetchBox}>
                   <div className={styles.autoRow}>
@@ -494,28 +619,30 @@ export default function InvoicePage() {
 
               <div className={styles.formGroup}>
                 <label>Invoice Date</label>
-                <DatePicker 
-                  selected={invoiceDate} 
-                  onChange={(date: Date | null) => setInvoiceDate(date)} 
+                <DatePicker
+                  selected={invoiceDate}
+                  onChange={(date: Date | null) => setInvoiceDate(date)}
                   className={styles.drawerInput}
                   dateFormat="MMMM d, yyyy"
                 />
               </div>
               <div className={styles.formGroup}>
                 <label>Due Date</label>
-                <DatePicker 
-                  selected={dueDate} 
-                  onChange={(date: Date | null) => setDueDate(date)} 
+                <DatePicker
+                  selected={dueDate}
+                  onChange={(date: Date | null) => setDueDate(date)}
                   className={styles.drawerInput}
                   dateFormat="MMMM d, yyyy"
                 />
               </div>
               <div className={styles.formGroup}>
                 <label>Status</label>
-                <select 
+                <select
                   className={styles.drawerSelect}
                   value={invoiceStatus}
-                  onChange={(e) => setInvoiceStatus(e.target.value as InvoiceStatus)}
+                  onChange={(e) =>
+                    setInvoiceStatus(e.target.value as InvoiceStatus)
+                  }
                 >
                   <option value="Paid">Paid</option>
                   <option value="Pending">Pending</option>
@@ -524,17 +651,30 @@ export default function InvoicePage() {
               </div>
               <div className={styles.formGroup}>
                 <label>Additional Notes</label>
-                <textarea className={styles.drawerInput} rows={3} placeholder="Standard terms apply..."></textarea>
+                <textarea
+                  className={styles.drawerInput}
+                  rows={3}
+                  placeholder="Standard terms apply..."
+                ></textarea>
               </div>
             </div>
             <div className={styles.drawerFooter}>
-              <button className={styles.btnSecondary} onClick={() => setIsDrawerOpen(false)}>Cancel</button>
-              <button className={styles.btnPrimary} onClick={handleCreateInvoice}>Generate Invoice</button>
+              <button
+                className={styles.btnSecondary}
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className={styles.btnPrimary}
+                onClick={handleCreateInvoice}
+              >
+                Generate Invoice
+              </button>
             </div>
           </div>
         </div>
       )}
-
     </div>
   );
 }

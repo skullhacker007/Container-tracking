@@ -1,12 +1,12 @@
 .mapContainer {
   background: linear-gradient(145deg, #1e293b, #0f172a);
-  border: 1px solid #334155;
+  border: 0.0625rem solid #334155;
   border-radius: 1rem;
   padding: 2rem;
   margin-top: 2rem;
   box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.4),
-    0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    0 1.25rem 1.5625rem -0.3125rem rgba(0, 0, 0, 0.4),
+    0 0.625rem 0.625rem -0.3125rem rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
@@ -29,7 +29,7 @@
 
 .statusBadge {
   padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
+  border-radius: 624.9375rem;
   font-size: 0.875rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -39,35 +39,35 @@
 .statusLive {
   background-color: rgba(59, 130, 246, 0.2);
   color: #60a5fa;
-  border: 1px solid rgba(59, 130, 246, 0.4);
+  border: 0.0625rem solid rgba(59, 130, 246, 0.4);
 }
 
 .statusStart {
   background-color: rgba(168, 85, 247, 0.2);
   color: #c084fc;
-  border: 1px solid rgba(168, 85, 247, 0.4);
+  border: 0.0625rem solid rgba(168, 85, 247, 0.4);
 }
 
 .statusReached {
   background-color: rgba(34, 197, 94, 0.2);
   color: #4ade80;
-  border: 1px solid rgba(34, 197, 94, 0.4);
+  border: 0.0625rem solid rgba(34, 197, 94, 0.4);
 }
 
 .statusIdle {
   background-color: rgba(239, 68, 68, 0.2);
   color: #f87171;
-  border: 1px solid rgba(239, 68, 68, 0.4);
+  border: 0.0625rem solid rgba(239, 68, 68, 0.4);
 }
 
 .title::before {
   content: "";
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 50%;
   background-color: #22c55e;
-  box-shadow: 0 0 8px #22c55e;
+  box-shadow: 0 0 0.5rem #22c55e;
   animation: pulse 2s infinite;
 }
 
@@ -89,28 +89,28 @@
 }
 
 .markerDot {
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   background-color: #1e293b;
-  border: 4px solid #3b82f6;
+  border: 0.25rem solid #3b82f6;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 0.9375rem rgba(59, 130, 246, 0.4);
 }
 
 .destinationDot {
   border-color: #22c55e;
-  box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+  box-shadow: 0 0 0.9375rem rgba(34, 197, 94, 0.4);
 }
 
 .markerDot::after {
   content: "";
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 50%;
   background-color: #3b82f6;
 }
@@ -119,10 +119,9 @@
   background-color: #22c55e;
 }
 
-/* Idle Status Overrides */
 .idleDot {
   border-color: #ef4444 !important;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4) !important;
+  box-shadow: 0 0 0.9375rem rgba(239, 68, 68, 0.4) !important;
 }
 
 .idleDot::after {
@@ -137,11 +136,10 @@
   background: #1e293b;
   padding: 0.25rem 1rem;
   border-radius: 0.5rem;
-  border: 1px solid #334155;
-  margin-bottom: -0.5rem; /* pull date up slightly */
+  border: 0.0625rem solid #334155;
+  margin-bottom: -0.5rem;
 }
 
-/* Date Layout */
 .dateText {
   color: #94a3b8;
   font-size: 0.8rem;
@@ -155,7 +153,7 @@
 .pathContainer {
   flex: 1;
   position: relative;
-  height: 4px;
+  height: 0.25rem;
   margin: 0 1rem;
   display: flex;
   align-items: center;
@@ -165,7 +163,7 @@
   width: 100%;
   height: 100%;
   background-color: #334155;
-  border-radius: 2px;
+  border-radius: 0.125rem;
   position: relative;
   overflow: hidden;
 }
@@ -183,12 +181,12 @@
 
 .flightPath {
   background: none;
-  border-top: 4px dotted #475569;
+  border-top: 0.25rem dotted #475569;
 }
 
 .shipPath {
   background: none;
-  border-top: 4px dashed #0ea5e9;
+  border-top: 0.25rem dashed #0ea5e9;
   height: 0;
 }
 
@@ -201,20 +199,19 @@
   padding: 0.5rem;
   border-radius: 50%;
   box-shadow:
-    0 0 20px rgba(59, 130, 246, 0.8),
-    inset 0 0 5px rgba(255, 255, 255, 0.5);
+    0 0 1.25rem rgba(59, 130, 246, 0.8),
+    inset 0 0 0.3125rem rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 5;
-  transition: left 4s ease-in-out; /* Slower, smoother transition for a realistic travel feel */
+  transition: left 4s ease-in-out;
 }
 
 .vehicleIcon {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.3));
 }
 
-/* Static States for Vehicle Icon based on status */
 .startPosition {
   left: 0 !important;
   background-color: #64748b;
@@ -224,29 +221,54 @@
 .endPosition {
   left: calc(100% - 3rem) !important;
   background-color: #22c55e;
-  box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+  box-shadow: 0 0 0.9375rem rgba(34, 197, 94, 0.6);
 }
 
 .livePosition {
-  /* No left value strictly defined here, it's set by React style props */
   background-color: #3b82f6;
 }
 
 @keyframes pulse {
-  0% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes sweep {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
 }
 
 @keyframes moveVehicle {
-  0% { left: 0; transform: translateY(-50%) scale(1); }
-  20% { transform: translateY(-70%) scale(1.1); }
-  50% { left: 50%; transform: translateY(-50%) scale(1); }
-  80% { transform: translateY(-30%) scale(1.1); }
-  100% { left: calc(100% - 3rem); transform: translateY(-50%) scale(1); }
+  0% {
+    left: 0;
+    transform: translateY(-50%) scale(1);
+  }
+  20% {
+    transform: translateY(-70%) scale(1.1);
+  }
+  50% {
+    left: 50%;
+    transform: translateY(-50%) scale(1);
+  }
+  80% {
+    transform: translateY(-30%) scale(1.1);
+  }
+  100% {
+    left: calc(100% - 3rem);
+    transform: translateY(-50%) scale(1);
+  }
 }

@@ -1,16 +1,15 @@
 .wrapper {
   display: flex;
   background: linear-gradient(145deg, #1e293b, #0f172a);
-  border: 1px solid #334155;
+  border: 0.0625rem solid #334155;
   border-radius: 1rem;
   overflow: hidden;
-  box-shadow: 
-    0 20px 25px -5px rgba(0, 0, 0, 0.4), 
-    0 10px 10px -5px rgba(0, 0, 0, 0.2);
-  min-height: 400px;
+  box-shadow:
+    0 1.25rem 1.5625rem -0.3125rem rgba(0, 0, 0, 0.4),
+    0 0.625rem 0.625rem -0.3125rem rgba(0, 0, 0, 0.2);
+  min-height: 25rem;
 }
 
-/* 60% Left Side */
 .visualizerPanel {
   flex: 0 0 60%;
   display: flex;
@@ -20,10 +19,9 @@
   position: relative;
   overflow: hidden;
   padding: 2rem;
-  border-right: 1px solid #334155;
+  border-right: 0.0625rem solid #334155;
 }
 
-/* Grid lines for blueprint effect */
 .visualizerPanel::before {
   content: "";
   position: absolute;
@@ -31,28 +29,31 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
-  background-size: 30px 30px;
+  background-image:
+    linear-gradient(rgba(59, 130, 246, 0.1) 0.0625rem, transparent 0.0625rem),
+    linear-gradient(
+      90deg,
+      rgba(59, 130, 246, 0.1) 0.0625rem,
+      transparent 0.0625rem
+    );
+  background-size: 1.875rem 1.875rem;
   z-index: 0;
   pointer-events: none;
 }
 
-/* 3D Scene Setup */
 .scene {
-  width: 200px;
-  height: 100px;
-  perspective: 1000px;
+  width: 12.5rem;
+  height: 6.25rem;
+  perspective: 62.5rem;
   z-index: 1;
 }
 
 .cube {
   position: relative;
-  width: 200px;  /* Length of container */
-  height: 100px; /* Height of container */
+  width: 12.5rem;
+  height: 6.25rem;
   transform-style: preserve-3d;
-  transform: rotateX(-20deg) rotateY(45deg); /* Isometric Angle */
+  transform: rotateX(-20deg) rotateY(45deg);
   transition: transform 1s ease;
 }
 
@@ -60,87 +61,107 @@
   transform: rotateX(-15deg) rotateY(30deg);
 }
 
-/* Container Faces (Wireframe / Blueprint Style) */
 .face {
   position: absolute;
-  border: 2px solid rgba(56, 189, 248, 0.6);
+  border: 0.125rem solid rgba(56, 189, 248, 0.6);
   background: rgba(15, 23, 42, 0.6);
-  box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.2);
+  box-shadow: inset 0 0 0.9375rem rgba(56, 189, 248, 0.2);
 }
 
-.front, .back {
-  width: 200px;
-  height: 100px;
+.front,
+.back {
+  width: 12.5rem;
+  height: 6.25rem;
 }
 
-.right, .left {
-  width: 100px; /* Depth of container */
-  height: 100px;
+.right,
+.left {
+  width: 6.25rem;
+  height: 6.25rem;
 }
 
-.top, .bottom {
-  width: 200px;
-  height: 100px;
+.top,
+.bottom {
+  width: 12.5rem;
+  height: 6.25rem;
 }
 
-/* Face positioning using Z transformations */
-.front  { transform: translateZ(50px); }
-.back   { transform: rotateY(180deg) translateZ(50px); }
-.right  { transform: rotateY(90deg) translateZ(150px); }
-.left   { transform: rotateY(-90deg) translateZ(50px); }
-.top    { transform: rotateX(90deg) translateZ(50px); }
-.bottom { transform: rotateX(-90deg) translateZ(50px); }
+.front {
+  transform: translateZ(3.125rem);
+}
+.back {
+  transform: rotateY(180deg) translateZ(3.125rem);
+}
+.right {
+  transform: rotateY(90deg) translateZ(9.375rem);
+}
+.left {
+  transform: rotateY(-90deg) translateZ(3.125rem);
+}
+.top {
+  transform: rotateX(90deg) translateZ(3.125rem);
+}
+.bottom {
+  transform: rotateX(-90deg) translateZ(3.125rem);
+}
 
-/* Inner Fill Volume representing Capacity (Blueprint Blue) */
 .fillVolume {
   position: absolute;
   top: 0;
-  right: 0; /* Anchor to the right side instead of left */
-  height: 100px;
+  right: 0;
+  height: 6.25rem;
   transform-style: preserve-3d;
   transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: right center; /* Grow from right to left */
+  transform-origin: right center;
 }
 
 .fillFace {
   position: absolute;
   top: 0;
   left: 0;
-  /* Glowing blue blueprint fill */
-  background: rgba(56, 189, 248, 0.4); 
-  border: 1px solid rgba(56, 189, 248, 0.7);
+
+  background: rgba(56, 189, 248, 0.4);
+  border: 0.0625rem solid rgba(56, 189, 248, 0.7);
 }
 
-/* Dynamic width faces */
-.fillFront, .fillBack {
-  width: 100%; /* Will inherit percentage width from parent */
-  height: 100px;
+.fillFront,
+.fillBack {
+  width: 100%;
+  height: 6.25rem;
 }
 
-.fillRight, .fillLeft {
-  width: 100px; /* Fixed depth */
-  height: 100px;
+.fillRight,
+.fillLeft {
+  width: 6.25rem;
+  height: 6.25rem;
 }
 
 .fillTop {
-  width: 100%; /* Will inherit percentage width */
-  height: 100px;
+  width: 100%;
+  height: 6.25rem;
   background: rgba(56, 189, 248, 0.6);
-  box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.6);
+  box-shadow: inset 0 0 1.25rem rgba(56, 189, 248, 0.6);
 }
 
-/* Position Fill Faces */
-.fillFront  { transform: translateZ(50px); }
-.fillBack   { transform: rotateY(180deg) translateZ(50px); }
-.fillRight  { transform: rotateY(90deg) translateZ(50px); right: 0; }
-.fillLeft   { 
-  transform: rotateY(-90deg) translateZ(50px); 
-  /* The left face pushes out dynamically based on the width from the right */
-  right: 100%; 
+.fillFront {
+  transform: translateZ(3.125rem);
 }
-.fillTop    { transform: rotateX(90deg) translateZ(50px); }
+.fillBack {
+  transform: rotateY(180deg) translateZ(3.125rem);
+}
+.fillRight {
+  transform: rotateY(90deg) translateZ(3.125rem);
+  right: 0;
+}
+.fillLeft {
+  transform: rotateY(-90deg) translateZ(3.125rem);
 
-/* 40% Right Side - Metrics */
+  right: 100%;
+}
+.fillTop {
+  transform: rotateX(90deg) translateZ(3.125rem);
+}
+
 .dataPanel {
   flex: 0 0 40%;
   padding: 1rem;
@@ -155,7 +176,7 @@
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.025em;
-  border-bottom: 2px solid #334155;
+  border-bottom: 0.125rem solid #334155;
   padding-bottom: 1rem;
 }
 
@@ -177,10 +198,10 @@
   background: rgba(34, 197, 94, 0.15);
   color: #22c55e;
   padding: 0.25rem 1rem;
-  border-radius: 9999px;
+  border-radius: 624.9375rem;
   font-size: 0.875rem;
   font-weight: 600;
-  border: 1px solid rgba(34, 197, 94, 0.3);
+  border: 0.0625rem solid rgba(34, 197, 94, 0.3);
 }
 
 .statsGrid {
@@ -193,7 +214,7 @@
   background: #1e293b;
   padding: 1.25rem;
   border-radius: 0.75rem;
-  border: 1px solid #334155;
+  border: 0.0625rem solid #334155;
 }
 
 .statLabel {
@@ -247,32 +268,32 @@
 
 .progressBar {
   width: 100%;
-  height: 8px;
+  height: 0.5rem;
   background: #1e293b;
-  border-radius: 999px;
+  border-radius: 62.4375rem;
   overflow: hidden;
 }
 
 .progressFill {
   height: 100%;
   background: linear-gradient(90deg, #22c55e 0%, #3b82f6 100%);
-  border-radius: 999px;
+  border-radius: 62.4375rem;
   transition: width 1s ease-out;
 }
 
-/* Responsiveness */
-@media (max-width: 1024px) {
+@media (max-width: 64rem) {
   .wrapper {
     flex-direction: column;
   }
-  
-  .visualizerPanel, .dataPanel {
+
+  .visualizerPanel,
+  .dataPanel {
     flex: 1 1 100%;
   }
 
   .visualizerPanel {
-    min-height: 400px;
+    min-height: 25rem;
     border-right: none;
-    border-bottom: 1px solid #334155;
+    border-bottom: 0.0625rem solid #334155;
   }
 }

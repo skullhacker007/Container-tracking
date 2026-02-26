@@ -3,7 +3,16 @@
 import { useState, useMemo } from "react";
 import styles from "./page.module.css";
 import { podData, PODStatus, POD } from "@/data/pod";
-import { ChevronLeft, ChevronRight, FileCheck2, X, Truck, Ship, Plane, Train } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  FileCheck2,
+  X,
+  Truck,
+  Ship,
+  Plane,
+  Train,
+} from "lucide-react";
 import Image from "next/image";
 
 type TabType = PODStatus | "ALL";
@@ -18,8 +27,6 @@ const TABS: { label: string; value: TabType }[] = [
 ];
 
 const ITEMS_PER_PAGE = 5;
-
-// Helper to extract initials for avatar
 const getInitials = (name: string) => {
   if (!name) return "??";
   const parts = name.split(" ");
@@ -39,16 +46,16 @@ export default function ProofOfDeliveryPage() {
     if (activeTab !== "ALL") {
       result = podData.filter((pod) => pod.status === activeTab);
     }
-    // Sort by delivery date descending
     return result.sort(
-      (a, b) => new Date(b.deliveryDate).getTime() - new Date(a.deliveryDate).getTime()
+      (a, b) =>
+        new Date(b.deliveryDate).getTime() - new Date(a.deliveryDate).getTime(),
     );
   }, [activeTab]);
 
   const totalPages = Math.ceil(filteredPODs.length / ITEMS_PER_PAGE);
   const paginatedPODs = filteredPODs.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    currentPage * ITEMS_PER_PAGE,
   );
 
   const getCount = (status: TabType) => {
@@ -63,7 +70,6 @@ export default function ProofOfDeliveryPage() {
   };
 
   const handleRowClick = (pod: POD) => {
-    // Toggle selection if clicking the same row
     if (selectedPOD?.id === pod.id) {
       setSelectedPOD(null);
     } else {
@@ -73,15 +79,16 @@ export default function ProofOfDeliveryPage() {
 
   return (
     <div className={styles.container}>
-      {/* Header and Summary Counters */}
+      {}
       <div className={styles.header}>
         <h2>Proof of Delivery (POD)</h2>
-        <p>Logistics queue showing strictly Reached transport loads awaiting Proof of Delivery processing</p>
-        
-     
+        <p>
+          Logistics queue showing strictly Reached transport loads awaiting
+          Proof of Delivery processing
+        </p>
       </div>
 
-      {/* Pill Tabs Navigation */}
+      {}
       <div className={styles.tabs}>
         {TABS.map((tab) => (
           <button
@@ -95,10 +102,9 @@ export default function ProofOfDeliveryPage() {
         ))}
       </div>
 
-      {/* Main Layout Area */}
+      {}
       <div className={styles.contentArea}>
-        
-        {/* Left Side: List View */}
+        {}
         <div className={styles.listWrapper}>
           <div className={styles.listHeader}>
             <div className={styles.headerCell}>Transport ID</div>
@@ -106,65 +112,101 @@ export default function ProofOfDeliveryPage() {
             <div className={styles.headerCell}>Container ID</div>
             <div className={styles.headerCell}>Driver</div>
             <div className={styles.headerCell}>Contact</div>
-            <div className={styles.headerCell} style={{ textAlign: "center" }}>Transport</div>
-            <div className={styles.headerCell} style={{ textAlign: "center" }}>Status</div>
+            <div className={styles.headerCell} style={{ textAlign: "center" }}>
+              Transport
+            </div>
+            <div className={styles.headerCell} style={{ textAlign: "center" }}>
+              Status
+            </div>
           </div>
-          
+
           <div className={styles.listBody}>
             {paginatedPODs.length > 0 ? (
               paginatedPODs.map((pod) => (
-                <div 
-                  key={pod.id} 
+                <div
+                  key={pod.id}
                   className={`${styles.listItem} ${selectedPOD?.id === pod.id ? styles.selected : ""}`}
                   onClick={() => handleRowClick(pod)}
                 >
-                  {/* Transport ID */}
+                  {}
                   <div className={styles.cellContent}>
-                    <span className={styles.primaryText}>{pod.transportId}</span>
+                    <span className={styles.primaryText}>
+                      {pod.transportId}
+                    </span>
                   </div>
 
-                  {/* Customer Info */}
+                  {}
                   <div className={styles.cellContent}>
-                    <span className={styles.primaryText}>{pod.customerName}</span>
+                    <span className={styles.primaryText}>
+                      {pod.customerName}
+                    </span>
                     <span className={styles.secondaryText}>{pod.location}</span>
                   </div>
 
-                  {/* Container/POD IDs */}
+                  {}
                   <div className={styles.cellContent}>
-                    <span className={styles.primaryText}>{pod.containerId}</span>
+                    <span className={styles.primaryText}>
+                      {pod.containerId}
+                    </span>
                     {pod.status === "APPROVED" && (
-                      <span className={styles.secondaryText}>POD ID: {pod.id}</span>
+                      <span className={styles.secondaryText}>
+                        POD ID: {pod.id}
+                      </span>
                     )}
                   </div>
 
-                  {/* Driver Avatar */}
+                  {}
                   <div className={styles.driverCell}>
                     <div className={styles.avatar}>
                       {getInitials(pod.driverName)}
                     </div>
                     <div className={styles.cellContent}>
-                      <span className={styles.primaryText}>{pod.driverName}</span>
-                      <span className={styles.secondaryText}>{pod.receiverName} (Recv)</span>
+                      <span className={styles.primaryText}>
+                        {pod.driverName}
+                      </span>
+                      <span className={styles.secondaryText}>
+                        {pod.receiverName} (Recv)
+                      </span>
                     </div>
                   </div>
 
-                  {/* Contact Info */}
+                  {}
                   <div className={styles.cellContent}>
-                    <span className={styles.primaryText}>{pod.receiverContact}</span>
+                    <span className={styles.primaryText}>
+                      {pod.receiverContact}
+                    </span>
                   </div>
 
-                  {/* Transport Type */}
-                  <div className={styles.cellContent} style={{ alignItems: "center", justifyContent: "center" }}>
-                     {pod.type === "Truck" && <Truck size={20} className={styles.secondaryText} />}
-                     {pod.type === "Ship" && <Ship size={20} className={styles.secondaryText} />}
-                     {pod.type === "Flight" && <Plane size={20} className={styles.secondaryText} />}
-                     {pod.type === "Train" && <Train size={20} className={styles.secondaryText} />}
+                  {}
+                  <div
+                    className={styles.cellContent}
+                    style={{ alignItems: "center", justifyContent: "center" }}
+                  >
+                    {pod.type === "Truck" && (
+                      <Truck size={20} className={styles.secondaryText} />
+                    )}
+                    {pod.type === "Ship" && (
+                      <Ship size={20} className={styles.secondaryText} />
+                    )}
+                    {pod.type === "Flight" && (
+                      <Plane size={20} className={styles.secondaryText} />
+                    )}
+                    {pod.type === "Train" && (
+                      <Train size={20} className={styles.secondaryText} />
+                    )}
                   </div>
 
-                  {/* Status Box */}
-                  <div className={styles.cellContent} style={{ justifyContent: "center", alignItems: "center" }}>
+                  {}
+                  <div
+                    className={styles.cellContent}
+                    style={{ justifyContent: "center", alignItems: "center" }}
+                  >
                     <span className={`${styles.badge} ${styles[pod.status]}`}>
-                      {pod.status === "CALL_BACK" ? "CALL BACK" : pod.status === "VERIFICATION" ? "NOT VERIFIED" : pod.status}
+                      {pod.status === "CALL_BACK"
+                        ? "CALL BACK"
+                        : pod.status === "VERIFICATION"
+                          ? "NOT VERIFIED"
+                          : pod.status}
                     </span>
                   </div>
                 </div>
@@ -177,9 +219,12 @@ export default function ProofOfDeliveryPage() {
             )}
           </div>
 
-          {/* PAGINATION */}
+          {}
           {totalPages > 1 && (
-            <div className="paginationContainer" style={{ borderTop: "1px solid #334155" }}>
+            <div
+              className="paginationContainer"
+              style={{ borderTop: "0.0625rem solid #334155" }}
+            >
               <button
                 className="paginationBtn"
                 disabled={currentPage === 1}
@@ -216,45 +261,60 @@ export default function ProofOfDeliveryPage() {
           )}
         </div>
 
-        {/* Right Side: Details Panel */}
+        {}
         {selectedPOD && (
           <div className={styles.sidePanel}>
             <div className={styles.panelHeader}>
               <div className={styles.panelTitleGroup}>
                 <span className={styles.panelTitle}>{selectedPOD.orderId}</span>
-                <span className={`${styles.badge} ${styles[selectedPOD.status]}`}>
-                  {selectedPOD.status === "CALL_BACK" ? "CALL BACK" : selectedPOD.status}
+                <span
+                  className={`${styles.badge} ${styles[selectedPOD.status]}`}
+                >
+                  {selectedPOD.status === "CALL_BACK"
+                    ? "CALL BACK"
+                    : selectedPOD.status}
                 </span>
               </div>
-              <button className={styles.closeBtn} onClick={() => setSelectedPOD(null)}>
+              <button
+                className={styles.closeBtn}
+                onClick={() => setSelectedPOD(null)}
+              >
                 <X size={20} />
               </button>
             </div>
 
             <div className={styles.panelBody}>
-              {/* Identity Header */}
+              {}
               <div className={styles.identityBlock}>
                 <div className={styles.identityIcon}>
-                   {selectedPOD.type === "Truck" && <Truck size={24} />}
-                   {selectedPOD.type === "Ship" && <Ship size={24} />}
-                   {selectedPOD.type === "Flight" && <Plane size={24} />}
-                   {selectedPOD.type === "Train" && <Train size={24} />}
+                  {selectedPOD.type === "Truck" && <Truck size={24} />}
+                  {selectedPOD.type === "Ship" && <Ship size={24} />}
+                  {selectedPOD.type === "Flight" && <Plane size={24} />}
+                  {selectedPOD.type === "Train" && <Train size={24} />}
                 </div>
                 <div className={styles.cellContent}>
-                  <span className={styles.primaryText}>{selectedPOD.orderId}</span>
-                  <span className={styles.secondaryText}>{selectedPOD.customerName}</span>
+                  <span className={styles.primaryText}>
+                    {selectedPOD.orderId}
+                  </span>
+                  <span className={styles.secondaryText}>
+                    {selectedPOD.customerName}
+                  </span>
                 </div>
               </div>
 
-              {/* Data Grid */}
+              {}
               <div className={styles.infoGrid}>
                 <div className={styles.infoItem}>
                   <span className={styles.infoLabel}>Delivery Date:</span>
-                  <span className={styles.infoValue}>{selectedPOD.deliveryDate}</span>
+                  <span className={styles.infoValue}>
+                    {selectedPOD.deliveryDate}
+                  </span>
                 </div>
                 <div className={styles.infoItem}>
                   <span className={styles.infoLabel}>Driver:</span>
-                  <span className={styles.infoValue}>{selectedPOD.driverName}</span>
+                  <span className={styles.infoValue}>
+                    {selectedPOD.driverName}
+                  </span>
                 </div>
                 <div className={styles.infoItem}>
                   <span className={styles.infoLabel}>Transport Type:</span>
@@ -262,22 +322,31 @@ export default function ProofOfDeliveryPage() {
                 </div>
                 <div className={styles.infoItem}>
                   <span className={styles.infoLabel}>Receiver:</span>
-                  <span className={styles.infoValue}>{selectedPOD.receiverName}</span>
+                  <span className={styles.infoValue}>
+                    {selectedPOD.receiverName}
+                  </span>
                 </div>
-                <div className={styles.infoItem} style={{ gridColumn: "1 / -1" }}>
+                <div
+                  className={styles.infoItem}
+                  style={{ gridColumn: "1 / -1" }}
+                >
                   <span className={styles.infoLabel}>Delivery Address:</span>
-                  <span className={styles.infoValue}>{selectedPOD.location}</span>
+                  <span className={styles.infoValue}>
+                    {selectedPOD.location}
+                  </span>
                 </div>
               </div>
 
               {selectedPOD.notes && (
                 <div className={styles.docSection}>
                   <div className={styles.docTitle}>Notes</div>
-                  <span className={styles.secondaryText}>{selectedPOD.notes}</span>
+                  <span className={styles.secondaryText}>
+                    {selectedPOD.notes}
+                  </span>
                 </div>
               )}
 
-              {/* POD Documents */}
+              {}
               <div className={styles.docSection}>
                 <div className={styles.docTitle}>
                   POD Documents
@@ -285,23 +354,25 @@ export default function ProofOfDeliveryPage() {
                 </div>
                 <div className={styles.docPreview}>
                   <FileCheck2 size={32} />
-                  <span style={{ marginLeft: "0.5rem" }}>Document Attached</span>
+                  <span style={{ marginLeft: "0.5rem" }}>
+                    Document Attached
+                  </span>
                 </div>
               </div>
 
-              {/* Photo Evidence */}
+              {}
               <div className={styles.docSection}>
                 <div className={styles.docTitle}>
                   Photo Evidence
                   <span className={styles.downloadLink}>Download</span>
                 </div>
                 <div className={styles.photoPreview}>
-                  <Image 
-                    src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&q=80&w=400" 
-                    alt="Warehouse loading bay" 
+                  <Image
+                    src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&q=80&w=400"
+                    alt="Warehouse loading bay"
                     width={400}
                     height={250}
-                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                    style={{ width: "100%", height: "auto", display: "block" }}
                   />
                 </div>
               </div>

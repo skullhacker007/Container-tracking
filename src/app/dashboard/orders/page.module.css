@@ -24,13 +24,10 @@
   margin: 0;
 }
 
-/* ============================
-   TABS NAVIGATION
-============================ */
 .tabs {
   display: flex;
   gap: 1rem;
-  border-bottom: 2px solid #334155;
+  border-bottom: 0.125rem solid #334155;
   padding-bottom: 0;
   margin-bottom: 1rem;
 }
@@ -55,14 +52,13 @@
   color: #38bdf8;
 }
 
-/* The animated underline for active tab */
 .tabBtn::after {
   content: "";
   position: absolute;
-  bottom: -2px;
+  bottom: -0.125rem;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 0.125rem;
   background-color: #38bdf8;
   transform: scaleX(0);
   transition: transform 0.2s ease;
@@ -78,7 +74,7 @@
   justify-content: center;
   background-color: #334155;
   color: #f8fafc;
-  border-radius: 999px;
+  border-radius: 62.4375rem;
   padding: 0.1rem 0.5rem;
   font-size: 0.7rem;
   margin-left: 0.5rem;
@@ -90,14 +86,13 @@
   color: #38bdf8;
 }
 
-/* ============================
-   TABLE STYLES
-============================ */
 .tableContainer {
   background: #1e293b;
   border-radius: 0.75rem;
-  border: 1px solid #334155;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 0.0625rem solid #334155;
+  box-shadow:
+    0 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.1),
+    0 0.125rem 0.25rem -0.0625rem rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 
@@ -115,14 +110,14 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #334155;
+  border-bottom: 0.0625rem solid #334155;
 }
 
 .table td {
   padding: 1rem 1.5rem;
   color: #e2e8f0;
   font-size: 0.875rem;
-  border-bottom: 1px solid #334155;
+  border-bottom: 0.0625rem solid #334155;
   vertical-align: middle;
 }
 
@@ -134,9 +129,6 @@
   border-bottom: none;
 }
 
-/* ============================
-   CELL FORMATTING
-============================ */
 .orderId {
   font-weight: 600;
   color: #f8fafc;
@@ -155,12 +147,11 @@
   font-style: italic;
 }
 
-/* Badges */
 .badge {
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.6rem;
-  border-radius: 9999px;
+  border-radius: 624.9375rem;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.05em;

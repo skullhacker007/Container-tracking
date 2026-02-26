@@ -4,32 +4,28 @@
   gap: 1.5rem;
   width: 100%;
   min-height: 100%;
-  padding-right: 1.25rem; /* Prevent scrollbar overlap */
+  padding-right: 1.25rem;
 }
 
-/* Custom Webkit Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 0.5rem;
+  height: 0.5rem;
 }
 
 ::-webkit-scrollbar-track {
   background: #0f172a;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #475569;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #64748b;
 }
 
-/* ============================
-   HEADER & METRICS
-============================ */
 .header {
   display: flex;
   justify-content: space-between;
@@ -68,7 +64,7 @@
   align-items: center;
   gap: 0.5rem;
   background: #1e293b;
-  border: 1px solid #334155;
+  border: 0.0625rem solid #334155;
   color: #cbd5e1;
   font-size: 0.875rem;
   font-weight: 500;
@@ -102,13 +98,12 @@
   background: #2563eb;
 }
 
-/* Metrics Bar */
 .metricsBar {
   display: flex;
   align-items: center;
   gap: 1.5rem;
   padding: 1rem 0;
-  border-bottom: 1px solid #334155;
+  border-bottom: 0.0625rem solid #334155;
   margin-bottom: 0.5rem;
 }
 
@@ -131,7 +126,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.6rem;
-  border-radius: 9999px;
+  border-radius: 624.9375rem;
   font-size: 0.75rem;
   font-weight: 700;
 }
@@ -151,26 +146,25 @@
   color: #f87171;
 }
 
-/* ============================
-   INVOICE LIST
-============================ */
 .listContainer {
   display: flex;
   flex-direction: column;
   background: #1e293b;
   border-radius: 0.75rem;
-  border: 1px solid #334155;
+  border: 0.0625rem solid #334155;
   border-top: none;
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.1),
+    0 0.125rem 0.25rem -0.0625rem rgba(0, 0, 0, 0.06);
 }
 
 .listHeader {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr 1fr 1fr 1fr 80px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr 1fr 1fr 1fr 5rem;
   padding: 1rem 1.5rem;
   background: #0f172a;
-  border-bottom: 1px solid #334155;
+  border-bottom: 0.0625rem solid #334155;
 }
 
 .headerCell {
@@ -184,9 +178,9 @@
 
 .listItem {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr 1fr 1fr 1fr 80px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr 1fr 1fr 1fr 5rem;
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid #334155;
+  border-bottom: 0.0625rem solid #334155;
   align-items: center;
   transition: all 0.2s ease;
 }
@@ -236,7 +230,6 @@
   font-weight: 500;
 }
 
-/* Specific Customer Cell */
 .customerCell {
   display: flex;
   align-items: center;
@@ -259,7 +252,6 @@
   flex-shrink: 0;
 }
 
-/* Actions Cell */
 .actionsCell {
   display: flex;
   align-items: center;
@@ -285,10 +277,6 @@
   color: #f8fafc;
 }
 
-
-/* ============================
-   MODAL OVERLAY
-============================ */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -300,17 +288,19 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(0.25rem);
 }
 
 .modalContent {
   background: #1e293b;
-  width: 700px;
+  width: 43.75rem;
   max-width: 90vw;
-  max-height: 90vh; /* Allow it to fit inside the screen */
+  max-height: 90vh;
   border-radius: 0.75rem;
-  border: 1px solid #334155;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  border: 0.0625rem solid #334155;
+  box-shadow:
+    0 1.25rem 1.5625rem -0.3125rem rgba(0, 0, 0, 0.2),
+    0 0.625rem 0.625rem -0.3125rem rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -334,7 +324,7 @@
   align-items: center;
   padding: 1.25rem 1.5rem;
   background: #0f172a;
-  border-bottom: 1px solid #334155;
+  border-bottom: 0.0625rem solid #334155;
 }
 
 .modalHeader h3 {
@@ -367,22 +357,21 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  overflow-y: auto; /* Required for internal scrolling */
+  overflow-y: auto;
 }
 
-/* Invoice Template Styling */
 .invoiceTemplate {
   background: #ffffff;
   padding: 3rem;
   border-radius: 0.5rem;
   color: #0f172a;
-  font-family: inherit; /* Assuming Next flex/sans */
+  font-family: inherit;
 }
 
 .invoiceHeader {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 0.0625rem solid #e2e8f0;
   padding-bottom: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -450,7 +439,7 @@
 .invoiceTable th {
   text-align: left;
   padding: 0.75rem 0;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 0.0625rem solid #e2e8f0;
   color: #64748b;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -463,7 +452,7 @@
 
 .invoiceTable td {
   padding: 1.5rem 0;
-  border-bottom: 1px solid #f8fafc; /* very light or virtually none */
+  border-bottom: 0.0625rem solid #f8fafc;
   color: #475569;
   font-size: 0.875rem;
 }
@@ -478,8 +467,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f8fafc !important; /* Force background color for print */
-  -webkit-print-color-adjust: exact; /* Ensure color prints exactly */
+  background: #f8fafc !important;
+  -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
   padding: 1.5rem;
   border-radius: 0.5rem;
@@ -493,7 +482,7 @@
 
 .invoiceTotalRow .bigAmount {
   font-size: 1.5rem;
-  color: #3b82f6; /* Bright blue from the screenshot */
+  color: #3b82f6;
 }
 
 .modalFooter {
@@ -502,15 +491,12 @@
   gap: 0.75rem;
   padding: 1rem 1.5rem;
   background: #0f172a;
-  border-top: 1px solid #334155;
+  border-top: 0.0625rem solid #334155;
 }
 
-/* ============================
-   DRAWER / SIDEBAR (CREATE INVOICE)
-============================ */
 .drawerContent {
   background: #1e293b;
-  width: 450px;
+  width: 28.125rem;
   max-width: 100vw;
   height: 100vh;
   position: absolute;
@@ -518,7 +504,7 @@
   top: 0;
   display: flex;
   flex-direction: column;
-  box-shadow: -10px 0 25px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: -0.625rem 0 1.5625rem -0.3125rem rgba(0, 0, 0, 0.2);
   animation: slideDrawerIn 0.3s ease-out forwards;
 }
 
@@ -537,7 +523,7 @@
   align-items: center;
   padding: 1.5rem;
   background: #0f172a;
-  border-bottom: 1px solid #334155;
+  border-bottom: 0.0625rem solid #334155;
 }
 
 .drawerHeader h3 {
@@ -570,7 +556,7 @@
 
 .autoFetchBox {
   background: rgba(30, 41, 59, 0.5);
-  border: 1px solid #3b82f6;
+  border: 0.0625rem solid #3b82f6;
   border-radius: 0.5rem;
   padding: 1rem;
   display: flex;
@@ -599,7 +585,7 @@
   width: 100%;
   padding: 0.75rem 1rem;
   background: #0f172a;
-  border: 1px solid #334155;
+  border: 0.0625rem solid #334155;
   border-radius: 0.5rem;
   color: #f8fafc;
   font-size: 0.875rem;
@@ -621,32 +607,26 @@
 .drawerFooter {
   padding: 1.5rem;
   background: #0f172a;
-  border-top: 1px solid #334155;
+  border-top: 0.0625rem solid #334155;
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
 }
 
-/* ============================
-   PRINT (PDF DOWNLOAD) STYLES
-============================ */
 @media print {
-  /* Hide absolutely everything but the invoice template */
   body * {
     visibility: hidden;
   }
-  
-  /* Force light background for print */
+
   body {
     background-color: white !important;
   }
 
-  /* Target the specific printable area and make it visible */
-  .printableArea, .printableArea * {
+  .printableArea,
+  .printableArea * {
     visibility: visible;
   }
 
-  /* Position it perfectly at the top left of the printed page */
   .printableArea {
     position: absolute;
     left: 0;
@@ -658,12 +638,11 @@
     border: none;
   }
 
-  /* Hide the modal overlay background and close/download buttons during print */
   .modalOverlay {
     background: transparent;
     backdrop-filter: none;
   }
-  
+
   .modalContent {
     box-shadow: none;
     border: none;
@@ -671,7 +650,8 @@
     max-width: 100%;
   }
 
-  .modalHeader, .modalFooter {
+  .modalHeader,
+  .modalFooter {
     display: none !important;
   }
 }

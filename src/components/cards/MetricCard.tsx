@@ -28,12 +28,14 @@ export function MetricCard({
           <Icon className={styles.icon} size={20} />
         </div>
       </div>
-      
+
       <div className={styles.content}>
         <p className={styles.value}>{value}</p>
-        
+
         {trend && (
-          <div className={`${styles.trend} ${trend.isPositive ? styles.positive : styles.negative}`}>
+          <div
+            className={`${styles.trend} ${trend.isPositive ? styles.positive : styles.negative}`}
+          >
             <span className={styles.trendArrow}>
               {trend.isPositive ? "↑" : "↓"}
             </span>
@@ -42,8 +44,8 @@ export function MetricCard({
           </div>
         )}
       </div>
-      
-      {/* Decorative accent glow */}
+
+      {}
       <div className={styles.glow} />
     </div>
   );

@@ -22,9 +22,6 @@ export type TransportSummary = {
 };
 
 export const transportSummaryData: TransportSummary[] = [
-  // ======================
-  // TRUCKS
-  // ======================
   {
     transportId: "TRK-483921",
     type: "Truck",
@@ -94,9 +91,6 @@ export const transportSummaryData: TransportSummary[] = [
     status: "Live",
   },
 
-  // ======================
-  // SHIPS
-  // ======================
   {
     transportId: "SHP-309582",
     type: "Ship",
@@ -162,9 +156,6 @@ export const transportSummaryData: TransportSummary[] = [
     status: "Idle",
   },
 
-  // ======================
-  // FLIGHTS
-  // ======================
   {
     transportId: "FLT-902134",
     type: "Flight",
@@ -217,9 +208,6 @@ export const transportSummaryData: TransportSummary[] = [
     status: "Reached",
   },
 
-  // ======================
-  // TRAINS
-  // ======================
   {
     transportId: "TRN-216759",
     type: "Train",
@@ -273,17 +261,11 @@ export const transportSummaryData: TransportSummary[] = [
   },
 ];
 
-// ======================
-// NEW ANALYTICS DATA
-// ======================
-
 export type TrendDataPoint = {
   day: string;
   shipments: number;
   revenue: number;
 };
-
-// Represents 14 days of historical trend data
 export const shipmentTrendData: TrendDataPoint[] = [
   { day: "Feb 12", shipments: 120, revenue: 45000 },
   { day: "Feb 13", shipments: 135, revenue: 52000 },
@@ -301,10 +283,6 @@ export const shipmentTrendData: TrendDataPoint[] = [
   { day: "Feb 25", shipments: 290, revenue: 125000 },
 ];
 
-// ======================
-// ORDERS DATA
-// ======================
-
 export type OrderStatus = "ACTIVE" | "CLOSED" | "UPCOMING" | "CANCELLED";
 
 export interface Order {
@@ -318,75 +296,511 @@ export interface Order {
 }
 
 export const ordersData: Order[] = [
-  // ACTIVE
-  { id: "ORD-9001", customerName: "Emerald Freight", date: "2026-02-28", amount: 14500.0, destination: "Shanghai, CHN", status: "ACTIVE", items: 450 },
-  { id: "ORD-9002", customerName: "Iron Systems", date: "2026-02-27", amount: 8250.5, destination: "Rotterdam, NLD", status: "ACTIVE", items: 120 },
-  { id: "ORD-9003", customerName: "Neptune Partners", date: "2026-02-26", amount: 32400.0, destination: "Los Angeles, USA", status: "ACTIVE", items: 890 },
-  { id: "ORD-9004", customerName: "Titan Traders", date: "2026-02-25", amount: 42100.5, destination: "Houston, USA", status: "ACTIVE", items: 950 },
-  { id: "ORD-9005", customerName: "Pluto Systems", date: "2026-02-25", amount: 27600.0, destination: "Tokyo, JPN", status: "ACTIVE", items: 640 },
-  { id: "ORD-9006", customerName: "Pacific Transport", date: "2026-02-24", amount: 18500.0, destination: "Hamburg, DEU", status: "ACTIVE", items: 300 },
-  { id: "ORD-9007", customerName: "Saturn Transport", date: "2026-02-23", amount: 9400.0, destination: "Singapore, SGP", status: "ACTIVE", items: 150 },
-  { id: "ORD-9008", customerName: "Omega Associates", date: "2026-02-22", amount: 56000.0, destination: "Dubai, ARE", status: "ACTIVE", items: 1100 },
-  { id: "ORD-9009", customerName: "Sigma Partners", date: "2026-02-21", amount: 3100.0, destination: "Sydney, AUS", status: "ACTIVE", items: 45 },
-  { id: "ORD-9010", customerName: "Gold Ventures", date: "2026-02-20", amount: 22000.0, destination: "London, GBR", status: "ACTIVE", items: 500 },
-  { id: "ORD-9011", customerName: "Omega Worldwide", date: "2026-02-20", amount: 12500.0, destination: "New York, USA", status: "ACTIVE", items: 230 },
+  {
+    id: "ORD-9001",
+    customerName: "Emerald Freight",
+    date: "2026-02-28",
+    amount: 14500.0,
+    destination: "Shanghai, CHN",
+    status: "ACTIVE",
+    items: 450,
+  },
+  {
+    id: "ORD-9002",
+    customerName: "Iron Systems",
+    date: "2026-02-27",
+    amount: 8250.5,
+    destination: "Rotterdam, NLD",
+    status: "ACTIVE",
+    items: 120,
+  },
+  {
+    id: "ORD-9003",
+    customerName: "Neptune Partners",
+    date: "2026-02-26",
+    amount: 32400.0,
+    destination: "Los Angeles, USA",
+    status: "ACTIVE",
+    items: 890,
+  },
+  {
+    id: "ORD-9004",
+    customerName: "Titan Traders",
+    date: "2026-02-25",
+    amount: 42100.5,
+    destination: "Houston, USA",
+    status: "ACTIVE",
+    items: 950,
+  },
+  {
+    id: "ORD-9005",
+    customerName: "Pluto Systems",
+    date: "2026-02-25",
+    amount: 27600.0,
+    destination: "Tokyo, JPN",
+    status: "ACTIVE",
+    items: 640,
+  },
+  {
+    id: "ORD-9006",
+    customerName: "Pacific Transport",
+    date: "2026-02-24",
+    amount: 18500.0,
+    destination: "Hamburg, DEU",
+    status: "ACTIVE",
+    items: 300,
+  },
+  {
+    id: "ORD-9007",
+    customerName: "Saturn Transport",
+    date: "2026-02-23",
+    amount: 9400.0,
+    destination: "Singapore, SGP",
+    status: "ACTIVE",
+    items: 150,
+  },
+  {
+    id: "ORD-9008",
+    customerName: "Omega Associates",
+    date: "2026-02-22",
+    amount: 56000.0,
+    destination: "Dubai, ARE",
+    status: "ACTIVE",
+    items: 1100,
+  },
+  {
+    id: "ORD-9009",
+    customerName: "Sigma Partners",
+    date: "2026-02-21",
+    amount: 3100.0,
+    destination: "Sydney, AUS",
+    status: "ACTIVE",
+    items: 45,
+  },
+  {
+    id: "ORD-9010",
+    customerName: "Gold Ventures",
+    date: "2026-02-20",
+    amount: 22000.0,
+    destination: "London, GBR",
+    status: "ACTIVE",
+    items: 500,
+  },
+  {
+    id: "ORD-9011",
+    customerName: "Omega Worldwide",
+    date: "2026-02-20",
+    amount: 12500.0,
+    destination: "New York, USA",
+    status: "ACTIVE",
+    items: 230,
+  },
 
-  // CLOSED
-  { id: "ORD-8001", customerName: "Neptune Traders", date: "2026-02-15", amount: 1250.25, destination: "Sydney, AUS", status: "CLOSED", items: 80 },
-  { id: "ORD-8002", customerName: "Sigma Networks", date: "2026-02-14", amount: 105000.0, destination: "Antwerp, BEL", status: "CLOSED", items: 2050 },
-  { id: "ORD-8003", customerName: "Platinum International", date: "2026-02-13", amount: 8900.0, destination: "Mumbai, IND", status: "CLOSED", items: 190 },
-  { id: "ORD-8004", customerName: "Silver Shipping", date: "2026-02-12", amount: 45000.0, destination: "Shanghai, CHN", status: "CLOSED", items: 800 },
-  { id: "ORD-8005", customerName: "Uranus Group", date: "2026-02-11", amount: 32000.0, destination: "Rotterdam, NLD", status: "CLOSED", items: 600 },
-  { id: "ORD-8006", customerName: "Horizon Industries", date: "2026-02-10", amount: 15000.0, destination: "Los Angeles, USA", status: "CLOSED", items: 300 },
-  { id: "ORD-8007", customerName: "Beta Associates", date: "2026-02-09", amount: 21000.0, destination: "Houston, USA", status: "CLOSED", items: 450 },
-  { id: "ORD-8008", customerName: "Platinum Inc", date: "2026-02-08", amount: 11000.0, destination: "Tokyo, JPN", status: "CLOSED", items: 200 },
-  { id: "ORD-8009", customerName: "Jupiter Co", date: "2026-02-07", amount: 18000.0, destination: "Hamburg, DEU", status: "CLOSED", items: 350 },
-  { id: "ORD-8010", customerName: "Orion Technologies", date: "2026-02-06", amount: 27000.0, destination: "Singapore, SGP", status: "CLOSED", items: 550 },
-  { id: "ORD-8011", customerName: "Horizon Enterprises", date: "2026-02-05", amount: 31000.0, destination: "Rotterdam, NLD", status: "CLOSED", items: 400 },
-  { id: "ORD-8012", customerName: "Hercules Shipping", date: "2026-02-04", amount: 42000.0, destination: "Los Angeles, USA", status: "CLOSED", items: 800 },
-  { id: "ORD-8013", customerName: "Dynamic Corp", date: "2026-02-03", amount: 12000.0, destination: "Sydney, AUS", status: "CLOSED", items: 250 },
-  { id: "ORD-8014", customerName: "Nexus Systems", date: "2026-02-02", amount: 56000.0, destination: "London, GBR", status: "CLOSED", items: 1100 },
-  { id: "ORD-8015", customerName: "Silver Industries", date: "2026-02-01", amount: 8900.0, destination: "Sydney, AUS", status: "CLOSED", items: 120 },
-  { id: "ORD-8016", customerName: "Venus Inc", date: "2026-01-30", amount: 67000.0, destination: "Tokyo, JPN", status: "CLOSED", items: 1500 },
-  { id: "ORD-8017", customerName: "Alpha Cargo", date: "2026-01-28", amount: 23000.0, destination: "Shanghai, CHN", status: "CLOSED", items: 450 },
-  { id: "ORD-8018", customerName: "Venus Enterprises", date: "2026-01-25", amount: 14500.0, destination: "Singapore, SGP", status: "CLOSED", items: 300 },
-  { id: "ORD-8019", customerName: "Global Group", date: "2026-01-22", amount: 39000.0, destination: "Hamburg, DEU", status: "CLOSED", items: 650 },
-  { id: "ORD-8020", customerName: "Platinum Group", date: "2026-01-20", amount: 21000.0, destination: "New York, USA", status: "CLOSED", items: 400 },
-  { id: "ORD-8021", customerName: "Steel Holdings", date: "2026-01-18", amount: 88000.0, destination: "Antwerp, BEL", status: "CLOSED", items: 1700 },
-  { id: "ORD-8022", customerName: "Pluto Freight", date: "2026-01-15", amount: 45000.0, destination: "Dubai, ARE", status: "CLOSED", items: 900 },
-  { id: "ORD-8023", customerName: "Quantum Group", date: "2026-01-12", amount: 62000.0, destination: "Houston, USA", status: "CLOSED", items: 1200 },
-  { id: "ORD-8024", customerName: "Nexus Networks", date: "2026-01-10", amount: 17500.0, destination: "Mumbai, IND", status: "CLOSED", items: 350 },
+  {
+    id: "ORD-8001",
+    customerName: "Neptune Traders",
+    date: "2026-02-15",
+    amount: 1250.25,
+    destination: "Sydney, AUS",
+    status: "CLOSED",
+    items: 80,
+  },
+  {
+    id: "ORD-8002",
+    customerName: "Sigma Networks",
+    date: "2026-02-14",
+    amount: 105000.0,
+    destination: "Antwerp, BEL",
+    status: "CLOSED",
+    items: 2050,
+  },
+  {
+    id: "ORD-8003",
+    customerName: "Platinum International",
+    date: "2026-02-13",
+    amount: 8900.0,
+    destination: "Mumbai, IND",
+    status: "CLOSED",
+    items: 190,
+  },
+  {
+    id: "ORD-8004",
+    customerName: "Silver Shipping",
+    date: "2026-02-12",
+    amount: 45000.0,
+    destination: "Shanghai, CHN",
+    status: "CLOSED",
+    items: 800,
+  },
+  {
+    id: "ORD-8005",
+    customerName: "Uranus Group",
+    date: "2026-02-11",
+    amount: 32000.0,
+    destination: "Rotterdam, NLD",
+    status: "CLOSED",
+    items: 600,
+  },
+  {
+    id: "ORD-8006",
+    customerName: "Horizon Industries",
+    date: "2026-02-10",
+    amount: 15000.0,
+    destination: "Los Angeles, USA",
+    status: "CLOSED",
+    items: 300,
+  },
+  {
+    id: "ORD-8007",
+    customerName: "Beta Associates",
+    date: "2026-02-09",
+    amount: 21000.0,
+    destination: "Houston, USA",
+    status: "CLOSED",
+    items: 450,
+  },
+  {
+    id: "ORD-8008",
+    customerName: "Platinum Inc",
+    date: "2026-02-08",
+    amount: 11000.0,
+    destination: "Tokyo, JPN",
+    status: "CLOSED",
+    items: 200,
+  },
+  {
+    id: "ORD-8009",
+    customerName: "Jupiter Co",
+    date: "2026-02-07",
+    amount: 18000.0,
+    destination: "Hamburg, DEU",
+    status: "CLOSED",
+    items: 350,
+  },
+  {
+    id: "ORD-8010",
+    customerName: "Orion Technologies",
+    date: "2026-02-06",
+    amount: 27000.0,
+    destination: "Singapore, SGP",
+    status: "CLOSED",
+    items: 550,
+  },
+  {
+    id: "ORD-8011",
+    customerName: "Horizon Enterprises",
+    date: "2026-02-05",
+    amount: 31000.0,
+    destination: "Rotterdam, NLD",
+    status: "CLOSED",
+    items: 400,
+  },
+  {
+    id: "ORD-8012",
+    customerName: "Hercules Shipping",
+    date: "2026-02-04",
+    amount: 42000.0,
+    destination: "Los Angeles, USA",
+    status: "CLOSED",
+    items: 800,
+  },
+  {
+    id: "ORD-8013",
+    customerName: "Dynamic Corp",
+    date: "2026-02-03",
+    amount: 12000.0,
+    destination: "Sydney, AUS",
+    status: "CLOSED",
+    items: 250,
+  },
+  {
+    id: "ORD-8014",
+    customerName: "Nexus Systems",
+    date: "2026-02-02",
+    amount: 56000.0,
+    destination: "London, GBR",
+    status: "CLOSED",
+    items: 1100,
+  },
+  {
+    id: "ORD-8015",
+    customerName: "Silver Industries",
+    date: "2026-02-01",
+    amount: 8900.0,
+    destination: "Sydney, AUS",
+    status: "CLOSED",
+    items: 120,
+  },
+  {
+    id: "ORD-8016",
+    customerName: "Venus Inc",
+    date: "2026-01-30",
+    amount: 67000.0,
+    destination: "Tokyo, JPN",
+    status: "CLOSED",
+    items: 1500,
+  },
+  {
+    id: "ORD-8017",
+    customerName: "Alpha Cargo",
+    date: "2026-01-28",
+    amount: 23000.0,
+    destination: "Shanghai, CHN",
+    status: "CLOSED",
+    items: 450,
+  },
+  {
+    id: "ORD-8018",
+    customerName: "Venus Enterprises",
+    date: "2026-01-25",
+    amount: 14500.0,
+    destination: "Singapore, SGP",
+    status: "CLOSED",
+    items: 300,
+  },
+  {
+    id: "ORD-8019",
+    customerName: "Global Group",
+    date: "2026-01-22",
+    amount: 39000.0,
+    destination: "Hamburg, DEU",
+    status: "CLOSED",
+    items: 650,
+  },
+  {
+    id: "ORD-8020",
+    customerName: "Platinum Group",
+    date: "2026-01-20",
+    amount: 21000.0,
+    destination: "New York, USA",
+    status: "CLOSED",
+    items: 400,
+  },
+  {
+    id: "ORD-8021",
+    customerName: "Steel Holdings",
+    date: "2026-01-18",
+    amount: 88000.0,
+    destination: "Antwerp, BEL",
+    status: "CLOSED",
+    items: 1700,
+  },
+  {
+    id: "ORD-8022",
+    customerName: "Pluto Freight",
+    date: "2026-01-15",
+    amount: 45000.0,
+    destination: "Dubai, ARE",
+    status: "CLOSED",
+    items: 900,
+  },
+  {
+    id: "ORD-8023",
+    customerName: "Quantum Group",
+    date: "2026-01-12",
+    amount: 62000.0,
+    destination: "Houston, USA",
+    status: "CLOSED",
+    items: 1200,
+  },
+  {
+    id: "ORD-8024",
+    customerName: "Nexus Networks",
+    date: "2026-01-10",
+    amount: 17500.0,
+    destination: "Mumbai, IND",
+    status: "CLOSED",
+    items: 350,
+  },
 
-  // UPCOMING
-  { id: "ORD-7001", customerName: "Pegasus Shipping", date: "2026-03-01", amount: 19800.75, destination: "Hamburg, DEU", status: "UPCOMING", items: 310 },
-  { id: "ORD-7002", customerName: "Andromeda Logistics", date: "2026-03-02", amount: 55000.0, destination: "Dubai, ARE", status: "UPCOMING", items: 1200 },
-  { id: "ORD-7003", customerName: "Gold International", date: "2026-03-03", amount: 8900.0, destination: "London, GBR", status: "UPCOMING", items: 215 },
-  { id: "ORD-7004", customerName: "Alpha Associates", date: "2026-03-04", amount: 42000.0, destination: "New York, USA", status: "UPCOMING", items: 900 },
-  { id: "ORD-7005", customerName: "Nexus Technologies", date: "2026-03-05", amount: 28000.0, destination: "Sydney, AUS", status: "UPCOMING", items: 600 },
-  { id: "ORD-7006", customerName: "Omega Ventures", date: "2026-03-06", amount: 16000.0, destination: "Antwerp, BEL", status: "UPCOMING", items: 350 },
-  { id: "ORD-7007", customerName: "Andromeda Networks", date: "2026-03-07", amount: 33000.0, destination: "Mumbai, IND", status: "UPCOMING", items: 700 },
-  { id: "ORD-7008", customerName: "Hercules Worldwide", date: "2026-03-08", amount: 14000.0, destination: "Shanghai, CHN", status: "UPCOMING", items: 250 },
-  { id: "ORD-7009", customerName: "Stellar Freight", date: "2026-03-09", amount: 25000.0, destination: "Rotterdam, NLD", status: "UPCOMING", items: 500 },
-  { id: "ORD-7010", customerName: "Steel Ventures", date: "2026-03-10", amount: 38000.0, destination: "Los Angeles, USA", status: "UPCOMING", items: 850 },
+  {
+    id: "ORD-7001",
+    customerName: "Pegasus Shipping",
+    date: "2026-03-01",
+    amount: 19800.75,
+    destination: "Hamburg, DEU",
+    status: "UPCOMING",
+    items: 310,
+  },
+  {
+    id: "ORD-7002",
+    customerName: "Andromeda Logistics",
+    date: "2026-03-02",
+    amount: 55000.0,
+    destination: "Dubai, ARE",
+    status: "UPCOMING",
+    items: 1200,
+  },
+  {
+    id: "ORD-7003",
+    customerName: "Gold International",
+    date: "2026-03-03",
+    amount: 8900.0,
+    destination: "London, GBR",
+    status: "UPCOMING",
+    items: 215,
+  },
+  {
+    id: "ORD-7004",
+    customerName: "Alpha Associates",
+    date: "2026-03-04",
+    amount: 42000.0,
+    destination: "New York, USA",
+    status: "UPCOMING",
+    items: 900,
+  },
+  {
+    id: "ORD-7005",
+    customerName: "Nexus Technologies",
+    date: "2026-03-05",
+    amount: 28000.0,
+    destination: "Sydney, AUS",
+    status: "UPCOMING",
+    items: 600,
+  },
+  {
+    id: "ORD-7006",
+    customerName: "Omega Ventures",
+    date: "2026-03-06",
+    amount: 16000.0,
+    destination: "Antwerp, BEL",
+    status: "UPCOMING",
+    items: 350,
+  },
+  {
+    id: "ORD-7007",
+    customerName: "Andromeda Networks",
+    date: "2026-03-07",
+    amount: 33000.0,
+    destination: "Mumbai, IND",
+    status: "UPCOMING",
+    items: 700,
+  },
+  {
+    id: "ORD-7008",
+    customerName: "Hercules Worldwide",
+    date: "2026-03-08",
+    amount: 14000.0,
+    destination: "Shanghai, CHN",
+    status: "UPCOMING",
+    items: 250,
+  },
+  {
+    id: "ORD-7009",
+    customerName: "Stellar Freight",
+    date: "2026-03-09",
+    amount: 25000.0,
+    destination: "Rotterdam, NLD",
+    status: "UPCOMING",
+    items: 500,
+  },
+  {
+    id: "ORD-7010",
+    customerName: "Steel Ventures",
+    date: "2026-03-10",
+    amount: 38000.0,
+    destination: "Los Angeles, USA",
+    status: "UPCOMING",
+    items: 850,
+  },
 
-  // CANCELLED
-  { id: "ORD-6001", customerName: "Lyra Ventures", date: "2026-02-25", amount: 3400.0, destination: "Mumbai, IND", status: "CANCELLED", items: 400 },
-  { id: "ORD-6002", customerName: "Pegasus Group", date: "2026-02-20", amount: 4100.0, destination: "Singapore, SGP", status: "CANCELLED", items: 55 },
-  { id: "ORD-6003", customerName: "Mercury Networks", date: "2026-02-18", amount: 15000.0, destination: "Houston, USA", status: "CANCELLED", items: 300 },
-  { id: "ORD-6004", customerName: "Hercules Transport", date: "2026-02-15", amount: 22000.0, destination: "Tokyo, JPN", status: "CANCELLED", items: 450 },
-  { id: "ORD-6005", customerName: "Andromeda Shipping", date: "2026-02-10", amount: 9000.0, destination: "Hamburg, DEU", status: "CANCELLED", items: 150 },
-  { id: "ORD-6006", customerName: "Quantum Networks", date: "2026-02-05", amount: 31000.0, destination: "Dubai, ARE", status: "CANCELLED", items: 650 },
-  { id: "ORD-6007", customerName: "Ruby Cargo", date: "2026-02-01", amount: 12000.0, destination: "London, GBR", status: "CANCELLED", items: 200 },
-  { id: "ORD-6008", customerName: "Global Cargo", date: "2026-01-25", amount: 26000.0, destination: "New York, USA", status: "CANCELLED", items: 500 },
-  { id: "ORD-6009", customerName: "Gold Group", date: "2026-01-20", amount: 19000.0, destination: "Sydney, AUS", status: "CANCELLED", items: 350 },
-  { id: "ORD-6010", customerName: "Nova Systems", date: "2026-01-15", amount: 40000.0, destination: "Antwerp, BEL", status: "CANCELLED", items: 800 },
+  {
+    id: "ORD-6001",
+    customerName: "Lyra Ventures",
+    date: "2026-02-25",
+    amount: 3400.0,
+    destination: "Mumbai, IND",
+    status: "CANCELLED",
+    items: 400,
+  },
+  {
+    id: "ORD-6002",
+    customerName: "Pegasus Group",
+    date: "2026-02-20",
+    amount: 4100.0,
+    destination: "Singapore, SGP",
+    status: "CANCELLED",
+    items: 55,
+  },
+  {
+    id: "ORD-6003",
+    customerName: "Mercury Networks",
+    date: "2026-02-18",
+    amount: 15000.0,
+    destination: "Houston, USA",
+    status: "CANCELLED",
+    items: 300,
+  },
+  {
+    id: "ORD-6004",
+    customerName: "Hercules Transport",
+    date: "2026-02-15",
+    amount: 22000.0,
+    destination: "Tokyo, JPN",
+    status: "CANCELLED",
+    items: 450,
+  },
+  {
+    id: "ORD-6005",
+    customerName: "Andromeda Shipping",
+    date: "2026-02-10",
+    amount: 9000.0,
+    destination: "Hamburg, DEU",
+    status: "CANCELLED",
+    items: 150,
+  },
+  {
+    id: "ORD-6006",
+    customerName: "Quantum Networks",
+    date: "2026-02-05",
+    amount: 31000.0,
+    destination: "Dubai, ARE",
+    status: "CANCELLED",
+    items: 650,
+  },
+  {
+    id: "ORD-6007",
+    customerName: "Ruby Cargo",
+    date: "2026-02-01",
+    amount: 12000.0,
+    destination: "London, GBR",
+    status: "CANCELLED",
+    items: 200,
+  },
+  {
+    id: "ORD-6008",
+    customerName: "Global Cargo",
+    date: "2026-01-25",
+    amount: 26000.0,
+    destination: "New York, USA",
+    status: "CANCELLED",
+    items: 500,
+  },
+  {
+    id: "ORD-6009",
+    customerName: "Gold Group",
+    date: "2026-01-20",
+    amount: 19000.0,
+    destination: "Sydney, AUS",
+    status: "CANCELLED",
+    items: 350,
+  },
+  {
+    id: "ORD-6010",
+    customerName: "Nova Systems",
+    date: "2026-01-15",
+    amount: 40000.0,
+    destination: "Antwerp, BEL",
+    status: "CANCELLED",
+    items: 800,
+  },
 ];
-
-// ======================
-// PROOF OF DELIVERY (POD) DATA
-// ======================
-
-export type PODStatus = "VERIFICATION" | "APPROVED" | "CANCELED" | "HOLD" | "CALL_BACK";
+export type PODStatus =
+  | "VERIFICATION"
+  | "APPROVED"
+  | "CANCELED"
+  | "HOLD"
+  | "CALL_BACK";
 
 export interface POD {
   id: string;
@@ -405,37 +819,261 @@ export interface POD {
 }
 
 export const podData: POD[] = [
-  // --- TRK-981023 (Truck) - 2 Containers ---
-  { id: "POD-1001", orderId: "ORD-8001", transportId: "TRK-981023", containerId: "CONT-8920-A", customerName: "Orion Inc", deliveryDate: "2026-02-21", location: "Sydney, AUS", receiverName: "Donald Garcia", receiverContact: "+63 216-306-4541", driverName: "Jeffrey Green", type: "Truck", status: "VERIFICATION", notes: "Delivered safely" },
-  { id: "POD-1002", orderId: "ORD-8001", transportId: "TRK-981023", containerId: "CONT-8920-B", customerName: "Titan Worldwide", deliveryDate: "2026-02-21", location: "Sydney, AUS", receiverName: "Samantha Thompson", receiverContact: "+78 221-846-9008", driverName: "Rebecca Nguyen", type: "Truck", status: "VERIFICATION" },
-
-  // --- SHP-781044 (Ship) - 4 Containers ---
-  { id: "POD-1003", orderId: "ORD-8002", transportId: "SHP-781044", containerId: "CONT-1044-1", customerName: "Sigma Traders", deliveryDate: "2026-02-18", location: "Antwerp, BEL", receiverName: "Nicholas Nguyen", receiverContact: "+32 213-398-8743", driverName: "Anthony Thomas", type: "Ship", status: "APPROVED", notes: "Signed by security" },
-  { id: "POD-1004", orderId: "ORD-8002", transportId: "SHP-781044", containerId: "CONT-1044-2", customerName: "Pegasus Inc", deliveryDate: "2026-02-18", location: "Antwerp, BEL", receiverName: "Richard Robinson", receiverContact: "+33 376-533-4947", driverName: "Edward Lee", type: "Ship", status: "APPROVED" },
-  { id: "POD-1005", orderId: "ORD-8002", transportId: "SHP-781044", containerId: "CONT-1044-3", customerName: "Copper Transport", deliveryDate: "2026-02-18", location: "Antwerp, BEL", receiverName: "Andrew Hernandez", receiverContact: "+80 707-489-4872", driverName: "Jeffrey Clark", type: "Ship", status: "APPROVED" },
-  { id: "POD-1006", orderId: "ORD-8002", transportId: "SHP-781044", containerId: "CONT-1044-4", customerName: "Nexus Solutions", deliveryDate: "2026-02-18", location: "Antwerp, BEL", receiverName: "Emily Perez", receiverContact: "+91 511-306-8369", driverName: "Ryan Hernandez", type: "Ship", status: "APPROVED" },
-
-  // --- FLT-118230 (Flight) - 6 Containers ---
-  { id: "POD-1007", orderId: "ORD-9001", transportId: "FLT-118230", containerId: "CONT-8230-01", customerName: "Pluto Networks", deliveryDate: "2026-02-20", location: "Mumbai, IND", receiverName: "Ryan Davis", receiverContact: "+37 265-676-7747", driverName: "Jonathan Jones", type: "Flight", status: "APPROVED" },
-  { id: "POD-1008", orderId: "ORD-9001", transportId: "FLT-118230", containerId: "CONT-8230-02", customerName: "Gold Associates", deliveryDate: "2026-02-20", location: "Mumbai, IND", receiverName: "Melissa Thomas", receiverContact: "+12 948-419-7201", driverName: "Amanda Martin", type: "Flight", status: "APPROVED" },
-  { id: "POD-1009", orderId: "ORD-9001", transportId: "FLT-118230", containerId: "CONT-8230-03", customerName: "Apex Worldwide", deliveryDate: "2026-02-20", location: "Mumbai, IND", receiverName: "James King", receiverContact: "+4 395-600-9691", driverName: "Mary Wright", type: "Flight", status: "APPROVED" },
-  { id: "POD-1010", orderId: "ORD-9001", transportId: "FLT-118230", containerId: "CONT-8230-04", customerName: "Nova Shipping", deliveryDate: "2026-02-20", location: "Mumbai, IND", receiverName: "Ronald King", receiverContact: "+60 595-181-3738", driverName: "George Hall", type: "Flight", status: "APPROVED" },
-  { id: "POD-1011", orderId: "ORD-9001", transportId: "FLT-118230", containerId: "CONT-8230-05", customerName: "Titan Logistics", deliveryDate: "2026-02-20", location: "Mumbai, IND", receiverName: "Stephen Hernandez", receiverContact: "+66 957-451-2437", driverName: "Ronald Rodriguez", type: "Flight", status: "APPROVED" },
-  { id: "POD-1012", orderId: "ORD-9001", transportId: "FLT-118230", containerId: "CONT-8230-06", customerName: "Venus Shipping", deliveryDate: "2026-02-20", location: "Mumbai, IND", receiverName: "Amanda Lewis", receiverContact: "+7 959-323-7491", driverName: "Lauren Perez", type: "Flight", status: "APPROVED" },
-
-  // --- TRN-901824 (Train) - 6 Containers ---
-  { id: "POD-1013", orderId: "ORD-9002", transportId: "TRN-901824", containerId: "CONT-1824-A", customerName: "Saturn Ventures", deliveryDate: "2026-02-21", location: "Kolkata, IND", receiverName: "Jessica Perez", receiverContact: "+8 466-361-9839", driverName: "John Allen", type: "Train", status: "APPROVED" },
-  { id: "POD-1014", orderId: "ORD-9002", transportId: "TRN-901824", containerId: "CONT-1824-B", customerName: "Andromeda Solutions", deliveryDate: "2026-02-21", location: "Kolkata, IND", receiverName: "Daniel Rodriguez", receiverContact: "+16 965-818-6874", driverName: "David Sanchez", type: "Train", status: "APPROVED" },
-  { id: "POD-1015", orderId: "ORD-9002", transportId: "TRN-901824", containerId: "CONT-1824-C", customerName: "Iron Transport", deliveryDate: "2026-02-21", location: "Kolkata, IND", receiverName: "Eric Allen", receiverContact: "+11 654-260-7810", driverName: "Paul Wright", type: "Train", status: "CANCELED" },
-  { id: "POD-1016", orderId: "ORD-9002", transportId: "TRN-901824", containerId: "CONT-1824-D", customerName: "Titan Cargo", deliveryDate: "2026-02-21", location: "Kolkata, IND", receiverName: "Rebecca Green", receiverContact: "+14 651-942-9312", driverName: "Ronald Moore", type: "Train", status: "CANCELED" },
-  { id: "POD-1017", orderId: "ORD-9002", transportId: "TRN-901824", containerId: "CONT-1824-E", customerName: "Global Systems", deliveryDate: "2026-02-21", location: "Kolkata, IND", receiverName: "Stephen Lee", receiverContact: "+92 568-802-8297", driverName: "Mary Thomas", type: "Train", status: "HOLD" },
-  { id: "POD-1018", orderId: "ORD-9002", transportId: "TRN-901824", containerId: "CONT-1824-F", customerName: "Venus Ventures", deliveryDate: "2026-02-21", location: "Kolkata, IND", receiverName: "Stephen Williams", receiverContact: "+15 864-192-8312", driverName: "Jessica Brown", type: "Train", status: "CALL_BACK" },
+  {
+    id: "POD-1001",
+    orderId: "ORD-8001",
+    transportId: "TRK-981023",
+    containerId: "CONT-8920-A",
+    customerName: "Orion Inc",
+    deliveryDate: "2026-02-21",
+    location: "Sydney, AUS",
+    receiverName: "Donald Garcia",
+    receiverContact: "+63 216-306-4541",
+    driverName: "Jeffrey Green",
+    type: "Truck",
+    status: "VERIFICATION",
+    notes: "Delivered safely",
+  },
+  {
+    id: "POD-1002",
+    orderId: "ORD-8001",
+    transportId: "TRK-981023",
+    containerId: "CONT-8920-B",
+    customerName: "Titan Worldwide",
+    deliveryDate: "2026-02-21",
+    location: "Sydney, AUS",
+    receiverName: "Samantha Thompson",
+    receiverContact: "+78 221-846-9008",
+    driverName: "Rebecca Nguyen",
+    type: "Truck",
+    status: "VERIFICATION",
+  },
+  {
+    id: "POD-1003",
+    orderId: "ORD-8002",
+    transportId: "SHP-781044",
+    containerId: "CONT-1044-1",
+    customerName: "Sigma Traders",
+    deliveryDate: "2026-02-18",
+    location: "Antwerp, BEL",
+    receiverName: "Nicholas Nguyen",
+    receiverContact: "+32 213-398-8743",
+    driverName: "Anthony Thomas",
+    type: "Ship",
+    status: "APPROVED",
+    notes: "Signed by security",
+  },
+  {
+    id: "POD-1004",
+    orderId: "ORD-8002",
+    transportId: "SHP-781044",
+    containerId: "CONT-1044-2",
+    customerName: "Pegasus Inc",
+    deliveryDate: "2026-02-18",
+    location: "Antwerp, BEL",
+    receiverName: "Richard Robinson",
+    receiverContact: "+33 376-533-4947",
+    driverName: "Edward Lee",
+    type: "Ship",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1005",
+    orderId: "ORD-8002",
+    transportId: "SHP-781044",
+    containerId: "CONT-1044-3",
+    customerName: "Copper Transport",
+    deliveryDate: "2026-02-18",
+    location: "Antwerp, BEL",
+    receiverName: "Andrew Hernandez",
+    receiverContact: "+80 707-489-4872",
+    driverName: "Jeffrey Clark",
+    type: "Ship",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1006",
+    orderId: "ORD-8002",
+    transportId: "SHP-781044",
+    containerId: "CONT-1044-4",
+    customerName: "Nexus Solutions",
+    deliveryDate: "2026-02-18",
+    location: "Antwerp, BEL",
+    receiverName: "Emily Perez",
+    receiverContact: "+91 511-306-8369",
+    driverName: "Ryan Hernandez",
+    type: "Ship",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1007",
+    orderId: "ORD-9001",
+    transportId: "FLT-118230",
+    containerId: "CONT-8230-01",
+    customerName: "Pluto Networks",
+    deliveryDate: "2026-02-20",
+    location: "Mumbai, IND",
+    receiverName: "Ryan Davis",
+    receiverContact: "+37 265-676-7747",
+    driverName: "Jonathan Jones",
+    type: "Flight",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1008",
+    orderId: "ORD-9001",
+    transportId: "FLT-118230",
+    containerId: "CONT-8230-02",
+    customerName: "Gold Associates",
+    deliveryDate: "2026-02-20",
+    location: "Mumbai, IND",
+    receiverName: "Melissa Thomas",
+    receiverContact: "+12 948-419-7201",
+    driverName: "Amanda Martin",
+    type: "Flight",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1009",
+    orderId: "ORD-9001",
+    transportId: "FLT-118230",
+    containerId: "CONT-8230-03",
+    customerName: "Apex Worldwide",
+    deliveryDate: "2026-02-20",
+    location: "Mumbai, IND",
+    receiverName: "James King",
+    receiverContact: "+4 395-600-9691",
+    driverName: "Mary Wright",
+    type: "Flight",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1010",
+    orderId: "ORD-9001",
+    transportId: "FLT-118230",
+    containerId: "CONT-8230-04",
+    customerName: "Nova Shipping",
+    deliveryDate: "2026-02-20",
+    location: "Mumbai, IND",
+    receiverName: "Ronald King",
+    receiverContact: "+60 595-181-3738",
+    driverName: "George Hall",
+    type: "Flight",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1011",
+    orderId: "ORD-9001",
+    transportId: "FLT-118230",
+    containerId: "CONT-8230-05",
+    customerName: "Titan Logistics",
+    deliveryDate: "2026-02-20",
+    location: "Mumbai, IND",
+    receiverName: "Stephen Hernandez",
+    receiverContact: "+66 957-451-2437",
+    driverName: "Ronald Rodriguez",
+    type: "Flight",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1012",
+    orderId: "ORD-9001",
+    transportId: "FLT-118230",
+    containerId: "CONT-8230-06",
+    customerName: "Venus Shipping",
+    deliveryDate: "2026-02-20",
+    location: "Mumbai, IND",
+    receiverName: "Amanda Lewis",
+    receiverContact: "+7 959-323-7491",
+    driverName: "Lauren Perez",
+    type: "Flight",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1013",
+    orderId: "ORD-9002",
+    transportId: "TRN-901824",
+    containerId: "CONT-1824-A",
+    customerName: "Saturn Ventures",
+    deliveryDate: "2026-02-21",
+    location: "Kolkata, IND",
+    receiverName: "Jessica Perez",
+    receiverContact: "+8 466-361-9839",
+    driverName: "John Allen",
+    type: "Train",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1014",
+    orderId: "ORD-9002",
+    transportId: "TRN-901824",
+    containerId: "CONT-1824-B",
+    customerName: "Andromeda Solutions",
+    deliveryDate: "2026-02-21",
+    location: "Kolkata, IND",
+    receiverName: "Daniel Rodriguez",
+    receiverContact: "+16 965-818-6874",
+    driverName: "David Sanchez",
+    type: "Train",
+    status: "APPROVED",
+  },
+  {
+    id: "POD-1015",
+    orderId: "ORD-9002",
+    transportId: "TRN-901824",
+    containerId: "CONT-1824-C",
+    customerName: "Iron Transport",
+    deliveryDate: "2026-02-21",
+    location: "Kolkata, IND",
+    receiverName: "Eric Allen",
+    receiverContact: "+11 654-260-7810",
+    driverName: "Paul Wright",
+    type: "Train",
+    status: "CANCELED",
+  },
+  {
+    id: "POD-1016",
+    orderId: "ORD-9002",
+    transportId: "TRN-901824",
+    containerId: "CONT-1824-D",
+    customerName: "Titan Cargo",
+    deliveryDate: "2026-02-21",
+    location: "Kolkata, IND",
+    receiverName: "Rebecca Green",
+    receiverContact: "+14 651-942-9312",
+    driverName: "Ronald Moore",
+    type: "Train",
+    status: "CANCELED",
+  },
+  {
+    id: "POD-1017",
+    orderId: "ORD-9002",
+    transportId: "TRN-901824",
+    containerId: "CONT-1824-E",
+    customerName: "Global Systems",
+    deliveryDate: "2026-02-21",
+    location: "Kolkata, IND",
+    receiverName: "Stephen Lee",
+    receiverContact: "+92 568-802-8297",
+    driverName: "Mary Thomas",
+    type: "Train",
+    status: "HOLD",
+  },
+  {
+    id: "POD-1018",
+    orderId: "ORD-9002",
+    transportId: "TRN-901824",
+    containerId: "CONT-1824-F",
+    customerName: "Venus Ventures",
+    deliveryDate: "2026-02-21",
+    location: "Kolkata, IND",
+    receiverName: "Stephen Williams",
+    receiverContact: "+15 864-192-8312",
+    driverName: "Jessica Brown",
+    type: "Train",
+    status: "CALL_BACK",
+  },
 ];
-
-// ======================
-// INVOICE DATA
-// ======================
-// Fulfills the requirement: "only approved data will provide invoice"
 
 export type InvoiceStatus = "Paid" | "Pending" | "Overdue";
 
@@ -453,23 +1091,19 @@ export interface Invoice {
   type: "Truck" | "Ship" | "Flight" | "Train";
   daysInfo?: string; // E.g., "15 days remaining", "Net 30"
 }
-
-// Helper to determine status based on due date (mock logic)
-const getMockInvoiceStatus = (index: number): { status: InvoiceStatus; daysInfo: string } => {
+const getMockInvoiceStatus = (
+  index: number,
+): { status: InvoiceStatus; daysInfo: string } => {
   if (index % 3 === 0) return { status: "Paid", daysInfo: "Paid on time" };
-  if (index % 3 === 1) return { status: "Overdue", daysInfo: "45 days overdue" };
+  if (index % 3 === 1)
+    return { status: "Overdue", daysInfo: "45 days overdue" };
   return { status: "Pending", daysInfo: "15 days remaining" };
 };
-
-// Generate invoices ONLY from APPROVED PODs
 export const invoiceData: Invoice[] = podData
   .filter((pod) => pod.status === "APPROVED")
   .map((pod, index) => {
-    // Generate a determinisic mock amount based on orderId length and characters
     const mockAmount = 1000;
     const { status, daysInfo } = getMockInvoiceStatus(index);
-    
-    // Create email from customer name (e.g. "Meridian Foods" -> "billing@meridianfoods.com")
     const emailPrefix = pod.customerName.split(" ")[0].toLowerCase();
     const customerEmail = `${emailPrefix}.${pod.id.toLowerCase()}@billing.com`;
 

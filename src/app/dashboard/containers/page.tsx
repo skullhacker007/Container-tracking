@@ -14,20 +14,15 @@ export default function ContainersPage() {
   const [selectedVehicle, setSelectedVehicle] = useState<string>("");
   const [selectedContainer, setSelectedContainer] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  // --- 1. Extract valid TYPES ---
   const typeOptions = useMemo(() => {
     const types = Array.from(new Set(transportSummaryData.map((t) => t.type)));
     return types.map((t) => ({ label: t, value: t }));
   }, []);
-
-  // --- 2. Extract valid ROUTES based on selected TYPE ---
   const routeOptions = useMemo(() => {
     if (!selectedType) return [];
     const filtered = transportSummaryData.filter(
-      (t) => t.type === selectedType
+      (t) => t.type === selectedType,
     );
-    // Unique routes "From - To"
     const uniqueRoutes = new Map();
     filtered.forEach((t) => {
       const key = `${t.from}-${t.to}`;
@@ -37,16 +32,12 @@ export default function ContainersPage() {
     });
     return Array.from(uniqueRoutes.values());
   }, [selectedType]);
-
-  // --- 3. Extract valid VEHICLES based on selected TYPE & ROUTE ---
   const vehicleOptions = useMemo(() => {
     if (!selectedRoute) return [];
     const [from, to] = selectedRoute.split("-");
     const filtered = transportSummaryData.filter(
-      (t) => t.type === selectedType && t.from === from && t.to === to
+      (t) => t.type === selectedType && t.from === from && t.to === to,
     );
-
-    // Map the ID/Vehicle Number. Fallback to ID if no vehicleNum is provided.
     return filtered.map((t) => ({
       label: t.vehicleNumber
         ? `${t.vehicleNumber} (${t.transportId})`
@@ -54,14 +45,12 @@ export default function ContainersPage() {
       value: t.transportId,
     }));
   }, [selectedType, selectedRoute]);
-
-  // --- 4. Extract valid CONTAINERS based on selected VEHICLE ---
   const containerOptions = useMemo(() => {
     if (!selectedVehicle) return [];
     const filtered = containersData.filter(
-      (c) => c.transportId === selectedVehicle
+      (c) => c.transportId === selectedVehicle,
     );
-    
+
     return filtered.map((c) => ({
       label: c.containerId,
       value: c.containerId,
@@ -140,7 +129,12 @@ export default function ContainersPage() {
             <button
               type="submit"
               className={styles.submitBtn}
-              disabled={!selectedType || !selectedRoute || !selectedVehicle || !selectedContainer}
+              disabled={
+                !selectedType ||
+                !selectedRoute ||
+                !selectedVehicle ||
+                !selectedContainer
+              }
             >
               <Navigation size={18} />
               Track Container

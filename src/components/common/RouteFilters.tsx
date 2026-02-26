@@ -12,12 +12,8 @@ interface RouteFiltersProps {
 
 export function RouteFilters({ isOpen, onClose }: RouteFiltersProps) {
   const { filters, setFilters } = useFilters();
-  
-  // Local state for the dropdown before applying
   const [localType, setLocalType] = useState(filters.type);
   const [localStatus, setLocalStatus] = useState(filters.status);
-  
-  // Sync local inputs with global context when it changes
   useEffect(() => {
     setLocalType(filters.type);
     setLocalStatus(filters.status);
@@ -30,16 +26,18 @@ export function RouteFilters({ isOpen, onClose }: RouteFiltersProps) {
 
   return (
     <>
-      <div 
-        className={`${styles.overlay} ${isOpen ? styles.overlayOpen : ''}`} 
+      <div
+        className={`${styles.overlay} ${isOpen ? styles.overlayOpen : ""}`}
         onClick={onClose}
       />
-      <div className={`${styles.dropdownPanel} ${isOpen ? styles.dropdownOpen : ''}`}>
+      <div
+        className={`${styles.dropdownPanel} ${isOpen ? styles.dropdownOpen : ""}`}
+      >
         <div className={styles.filterRow}>
           <div className={styles.filterGroup}>
             <span className={styles.filterLabel}>Type</span>
             <div className={styles.selectWrapper}>
-              <select 
+              <select
                 className={styles.filterSelect}
                 value={localType}
                 onChange={(e) => setLocalType(e.target.value)}
@@ -57,7 +55,7 @@ export function RouteFilters({ isOpen, onClose }: RouteFiltersProps) {
           <div className={styles.filterGroup}>
             <span className={styles.filterLabel}>Status</span>
             <div className={styles.selectWrapper}>
-              <select 
+              <select
                 className={styles.filterSelect}
                 value={localStatus}
                 onChange={(e) => setLocalStatus(e.target.value)}

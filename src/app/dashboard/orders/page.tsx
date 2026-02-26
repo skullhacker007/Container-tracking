@@ -26,16 +26,15 @@ export default function OrdersPage() {
     if (activeTab !== "ALL") {
       result = ordersData.filter((order) => order.status === activeTab);
     }
-    // Sort by date descending (newest first)
     return result.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
     );
   }, [activeTab]);
 
   const totalPages = Math.ceil(filteredOrders.length / ITEMS_PER_PAGE);
   const paginatedOrders = filteredOrders.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    currentPage * ITEMS_PER_PAGE,
   );
 
   const getCount = (status: TabType) => {
@@ -57,10 +56,7 @@ export default function OrdersPage() {
 
   return (
     <div className={styles.container}>
-      {/* <div className={styles.header}>
-        <h2>Orders Management</h2>
-        <p>View and track all global freight and container orders.</p>
-      </div> */}
+      {}
 
       <div className={styles.tabs}>
         {TABS.map((tab) => (
@@ -97,7 +93,9 @@ export default function OrdersPage() {
                   <td>{order.customerName}</td>
                   <td>{order.destination}</td>
                   <td>{order.items}</td>
-                  <td className={styles.amount}>{formatCurrency(order.amount)}</td>
+                  <td className={styles.amount}>
+                    {formatCurrency(order.amount)}
+                  </td>
                   <td>
                     <span className={`${styles.badge} ${styles[order.status]}`}>
                       {order.status}
@@ -115,7 +113,7 @@ export default function OrdersPage() {
           </tbody>
         </table>
 
-        {/* PAGINATION (Using global CSS classes defined in globals.css) */}
+        {}
         {totalPages > 1 && (
           <div className="paginationContainer">
             <button
